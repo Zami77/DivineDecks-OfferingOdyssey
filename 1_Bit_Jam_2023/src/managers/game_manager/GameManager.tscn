@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://my4hr4g43jvb"]
+[gd_scene load_steps=4 format=3 uid="uid://my4hr4g43jvb"]
 
 [ext_resource type="Script" path="res://src/managers/game_manager/GameManager.gd" id="1_4plws"]
 [ext_resource type="PackedScene" uid="uid://dkqps2hf8pvva" path="res://src/ui/transition_screen/TransitionScreen.tscn" id="2_04rpx"]
+[ext_resource type="PackedScene" uid="uid://bgu78bf3p6d6v" path="res://src/player/Player.tscn" id="3_dlpgm"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_4plws")
@@ -13,3 +14,5 @@ z_index = -1
 offset_right = 720.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("3_dlpgm")]

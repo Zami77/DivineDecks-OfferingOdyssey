@@ -4,6 +4,7 @@ extends Node2D
 @export var default_scene = "res://src/ui/main_menu/MainMenu.tscn"
 
 @onready var transition_screen: TransitionScreen = $TransitionScreen
+@onready var player: Player = $Player
 
 var current_scene = null
 
@@ -29,6 +30,9 @@ func _load_scene(scene_path: String):
 	
 	if current_scene is MainMenu:
 		current_scene.option_selected.connect(_on_main_menu_option_selected)
+	
+	if current_scene is CombatManager:
+		current_scene.setup_combat(player)
 	
 	await transition_screen.faded_to_scene
 

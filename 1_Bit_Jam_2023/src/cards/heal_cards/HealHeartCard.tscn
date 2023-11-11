@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc6uwgqt78rj6"]
+
+[ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_wjrmd"]
+[ext_resource type="Texture2D" uid="uid://4ufyobtw7shw" path="res://src/cards/heal_cards/heal.png" id="2_3oawu"]
+
+[node name="HealHeartCard" instance=ExtResource("1_wjrmd")]
+card_image_texture = ExtResource("2_3oawu")
+card_types = Array[int]([3])
+card_name = 2
+heal_amount = 1

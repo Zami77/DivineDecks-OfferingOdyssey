@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvsuq4mxv0m7d"]
+
+[ext_resource type="PackedScene" uid="uid://cneuuoth3bny" path="res://src/deck/Deck.tscn" id="1_13kk1"]
+
+[node name="StartDeck" instance=ExtResource("1_13kk1")]
+card_names = Array[int]([0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2])

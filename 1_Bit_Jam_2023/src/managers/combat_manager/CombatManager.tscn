@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck45dg212r6ji"]
+[gd_scene load_steps=4 format=3 uid="uid://ck45dg212r6ji"]
 
 [ext_resource type="PackedScene" uid="uid://cneuuoth3bny" path="res://src/deck/Deck.tscn" id="1_4f8vu"]
 [ext_resource type="Script" path="res://src/managers/combat_manager/CombatManager.gd" id="1_jj8pp"]
+[ext_resource type="PackedScene" uid="uid://ctd586lfoxfcu" path="res://src/managers/combat_manager/Hand.tscn" id="3_467sl"]
 
 [node name="CombatManager" type="Node2D"]
 script = ExtResource("1_jj8pp")
@@ -10,12 +11,12 @@ script = ExtResource("1_jj8pp")
 offset_right = 720.0
 offset_bottom = 1080.0
 
-[node name="Hand" type="Node2D" parent="."]
-position = Vector2(128, 832)
-
 [node name="Deck" parent="." instance=ExtResource("1_4f8vu")]
 position = Vector2(16, 640)
 
 [node name="Discard" parent="." instance=ExtResource("1_4f8vu")]
 position = Vector2(576, 640)
 deck_type = 1
+
+[node name="Hand" parent="." instance=ExtResource("3_467sl")]
+position = Vector2(128, 832)

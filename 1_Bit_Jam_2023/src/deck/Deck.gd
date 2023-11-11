@@ -1,16 +1,18 @@
 class_name Deck
 extends Node2D
 
-@export var cards: Array[Card] 
+@export var card_names: Array[Card.CardName] = []
 @export var deck_type: DeckType = DeckType.DECK
 
 @onready var deck_texture_rect: TextureRect = $DeckTextureRect
 	
+var cards: Array[Card] 
+
 enum DeckType { DECK, DISCARD }
 
 func _ready():
-	for card in cards:
-		add_child(card)
+	for card_name in card_names:
+		add_card_from_name(card_name)
 	cards.shuffle()
 	
 	match deck_type:
@@ -29,6 +31,7 @@ func shuffle() -> void:
 
 func draw() -> Card:
 	var drawn_card = cards.pop_front()
+	drawn_card.visible = true
 	remove_child(drawn_card)
 	_check_visibility()
 	return drawn_card
@@ -36,4 +39,12 @@ func draw() -> Card:
 func add_card(new_card: Card) -> void:
 	cards.append(new_card)
 	add_card(new_card)
+	new_card.visible = false
+	_check_visibility()
+
+func add_card_from_name(card_name: Card.CardName) -> void:
+	var card = CardFactory.get_card_packed_scene(card_name)
+	add_child(card)
+	cards.append(card)
+	card.visible = false
 	_check_visibility()

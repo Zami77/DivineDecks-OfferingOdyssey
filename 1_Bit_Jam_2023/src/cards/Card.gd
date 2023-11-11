@@ -19,7 +19,7 @@ signal card_selected(card: Card)
 
 enum CardType { ATTACK, DEFEND, STATUS, HEAL }
 enum StatusEffect { POISON, STUN }
-enum CardName { ATTACK_SWORD }
+enum CardName { ATTACK_SWORD, DEFEND_HELMET, HEAL_HEART }
 
 func _ready():
 	_setup_card_image()
