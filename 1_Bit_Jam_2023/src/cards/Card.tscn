@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dluup08j8tx5b"]
+
+[ext_resource type="Script" path="res://src/cards/Card.gd" id="1_2agpo"]
+[ext_resource type="Texture2D" uid="uid://n0cdt881u7wp" path="res://src/cards/card_frame.png" id="2_jd4gx"]
+[ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="4_d2ufr"]
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_2agpo")
+
+[node name="CardFrame" type="TextureRect" parent="."]
+offset_right = 192.0
+offset_bottom = 256.0
+texture = ExtResource("2_jd4gx")
+
+[node name="CardImage" type="TextureRect" parent="."]
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 168.0
+offset_bottom = 128.0
+
+[node name="CardText" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 136.0
+offset_right = 176.0
+offset_bottom = 240.0
+theme = ExtResource("4_d2ufr")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
