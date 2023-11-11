@@ -1,8 +1,11 @@
 class_name Card
 extends Node2D
 
+signal card_selected(card: Card)
+
 @export var card_image_texture: Texture
 @export var card_types: Array[CardType] = [CardType.ATTACK]
+@export var card_name: CardName = CardName.ATTACK_SWORD
 @export var attack_amount: int = 0
 @export var defend_amount: int = 0
 @export var heal_amount: int = 0
@@ -11,13 +14,23 @@ extends Node2D
 
 @onready var card_image: TextureRect = $CardImage
 @onready var card_text: Label = $CardText
+@onready var selectable_area: Area2D = $SelectableArea
 
 
 enum CardType { ATTACK, DEFEND, STATUS, HEAL }
 enum StatusEffect { POISON, STUN }
+enum CardName { ATTACK_SWORD }
 
 func _ready():
+	_setup_card_image()
+	_setup_card_text()
+	
+	selectable_area.input_event.connect(_on_selectable_are_input_event)
+
+func _setup_card_image() -> void:
 	card_image.texture = card_image_texture
+
+func _setup_card_text() -> void:
 	card_text.text = ""
 	
 	for type in card_types:
@@ -31,3 +44,7 @@ func _ready():
 			CardType.HEAL:
 				card_text.text += "heals %d health to player" % heal_amount
 		card_text.text += "\n"
+
+func _on_selectable_are_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event.is_action_pressed("click"):
+		emit_signal("card_selected", self)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://my4hr4g43jvb"]
+
+[ext_resource type="Script" path="res://src/managers/game_manager/GameManager.gd" id="1_4plws"]
+[ext_resource type="PackedScene" uid="uid://dkqps2hf8pvva" path="res://src/ui/transition_screen/TransitionScreen.tscn" id="2_04rpx"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_4plws")
+
+[node name="TransitionScreen" parent="." instance=ExtResource("2_04rpx")]

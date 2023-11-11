@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dluup08j8tx5b"]
+[gd_scene load_steps=5 format=3 uid="uid://dluup08j8tx5b"]
 
 [ext_resource type="Script" path="res://src/cards/Card.gd" id="1_2agpo"]
 [ext_resource type="Texture2D" uid="uid://n0cdt881u7wp" path="res://src/cards/card_frame.png" id="2_jd4gx"]
 [ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="4_d2ufr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lf04x"]
+size = Vector2(192, 256)
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_2agpo")
@@ -27,3 +30,9 @@ theme = ExtResource("4_d2ufr")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="SelectableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableArea"]
+position = Vector2(96, 128)
+shape = SubResource("RectangleShape2D_lf04x")
