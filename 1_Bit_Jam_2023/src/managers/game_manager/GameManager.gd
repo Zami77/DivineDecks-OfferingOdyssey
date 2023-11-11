@@ -1,7 +1,7 @@
 class_name GameManager
 extends Node2D
 
-@export var default_scene = "res://src/managers/combat_manager/CombatManager.tscn"
+@export var default_scene = "res://src/ui/main_menu/MainMenu.tscn"
 
 @onready var transition_screen: TransitionScreen = $TransitionScreen
 
@@ -27,9 +27,17 @@ func _load_scene(scene_path: String):
 	transition_screen.fade_to_scene()
 	add_child(new_scene)
 	
+	if current_scene is MainMenu:
+		current_scene.option_selected.connect(_on_main_menu_option_selected)
 	
 	await transition_screen.faded_to_scene
 
-
 func _on_load_scene(scene_path) -> void:
 	_load_scene(scene_path)
+
+func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
+	match option:
+		MainMenu.Option.START_RUN:
+			_load_scene(ScenePaths.combat_manager)
+		MainMenu.Option.EXIT_GAME:
+			get_tree().quit()

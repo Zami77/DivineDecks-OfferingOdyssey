@@ -7,3 +7,9 @@
 script = ExtResource("1_4plws")
 
 [node name="TransitionScreen" parent="." instance=ExtResource("2_04rpx")]
+
+[node name="GameBackground" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 720.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)

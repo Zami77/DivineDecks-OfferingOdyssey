@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://8u4pftab8k7e"]
+
+[ext_resource type="Script" path="res://src/ui/main_menu/MainMenu.gd" id="1_o5udl"]
+[ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="1_ry7bh"]
+[ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="2_drprm"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_o5udl")
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_right = 720.0
+offset_bottom = 128.0
+theme = ExtResource("1_ry7bh")
+theme_override_font_sizes/font_size = 64
+text = "1-BIT JAM 2023"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 80.0
+offset_top = 616.0
+offset_right = 640.0
+offset_bottom = 968.0
+theme = ExtResource("1_ry7bh")
+alignment = 1
+
+[node name="StartRunButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start Run"
+script = ExtResource("2_drprm")
+
+[node name="ContinueRunButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Continue Run"
+script = ExtResource("2_drprm")
+
+[node name="ExitGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+script = ExtResource("2_drprm")
