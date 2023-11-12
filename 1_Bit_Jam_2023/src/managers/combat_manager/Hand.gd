@@ -14,6 +14,13 @@ func add_card(new_card: Card) -> void:
 		
 	new_card.card_selected.connect(_on_card_selected)
 
+func empty_hand() -> Array[Card]:
+	var remaining_hand = cards.duplicate(true)
+	
+	cards.clear()
+	
+	return remaining_hand
+
 func _on_card_selected(card: Card) -> void:
 	emit_signal("card_selected", card)
 	cards.erase(card)

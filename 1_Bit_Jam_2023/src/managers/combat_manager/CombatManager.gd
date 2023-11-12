@@ -1,6 +1,8 @@
 class_name CombatManager
 extends Node2D
 
+signal card_moved
+
 @export var card_play_tween_duration: float = 0.3
 
 @onready var deck: Deck = $Deck
@@ -8,6 +10,7 @@ extends Node2D
 @onready var hand: CardHand = $Hand
 @onready var card_play_area: Node2D = $CardPlayArea
 @onready var enemy_area: Node2D = $EnemyArea
+@onready var end_turn_button: DefaultButton = $EndTurnButton
 
 var player: Player = null
 var enemy: Enemy = null
@@ -18,11 +21,13 @@ enum TurnOwner { PLAYER, ENEMY, COMBAT_OVER }
 func _ready():
 	DataManager.save_game()
 	hand.card_selected.connect(_on_card_selected_from_hand)
+	end_turn_button.pressed.connect(_on_end_turn_button_pressed)
 
 func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType.SPECTER) -> void:
 	player = _player
 	enemy = EnemyFactory.get_enemy_packed_scene(enemy_type)
 	enemy_area.add_child(enemy)
+	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
 	
 	for card_name in player.deck:
 		deck.add_card_from_name(card_name)
@@ -56,9 +61,8 @@ func _execute_card_action(card: Card) -> void:
 	card.global_position = card_old_global_pos
 	
 	# move to card play area
-	var card_pos_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
-	card_pos_tween.tween_property(card, "global_position", card_play_area.global_position, card_play_tween_duration)
-	await card_pos_tween.finished
+	_move_card(card, card_play_area.global_position)
+	await card_moved
 	
 	# do card action
 	_do_card_action(card)
@@ -66,6 +70,25 @@ func _execute_card_action(card: Card) -> void:
 	await get_tree().create_timer(0.3).timeout
 	# remove from game
 	remove_child(card)
+
+func _move_card(card: Card, end_global_position: Vector2) -> void:
+	var card_pos_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
+	card_pos_tween.tween_property(card, "global_position", end_global_position, card_play_tween_duration)
+	await card_pos_tween.finished
+	emit_signal("card_moved")
+
+func _execute_end_turn() -> void:
+	_empty_hand()
+
+
+func _empty_hand() -> void:
+	var remaining_cards_in_hand = hand.empty_hand()
+	
+	for card in remaining_cards_in_hand:
+		_move_card(card, discard.global_position)
+		await card_moved
+		hand.remove_child(card)
+		discard.add_card(card)
 
 func _do_card_action(card: Card) -> void:
 	for card_type in card.card_types:
@@ -81,3 +104,10 @@ func _do_card_action(card: Card) -> void:
 
 func _on_card_selected_from_hand(card_selected: Card) -> void:
 	_execute_card_action(card_selected)
+
+func _on_enemy_destroyed() -> void:
+	turn_owner = TurnOwner.COMBAT_OVER
+	print("Player wins!")
+
+func _on_end_turn_button_pressed() -> void:
+	_execute_end_turn()

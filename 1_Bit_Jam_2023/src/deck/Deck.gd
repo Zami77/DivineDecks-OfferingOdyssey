@@ -38,7 +38,7 @@ func draw() -> Card:
 
 func add_card(new_card: Card) -> void:
 	cards.append(new_card)
-	add_card(new_card)
+	add_child(new_card)
 	new_card.visible = false
 	_check_visibility()
 
