@@ -10,18 +10,20 @@ var card_buffer: int = 16
 func add_card(new_card: Card) -> void:
 	cards.append(new_card)
 	add_child(new_card)
+	new_card.global_position = global_position
 	new_card.position.x += (cards.size() - 1) * Dimensions.card_width
-		
-	new_card.card_selected.connect(_on_card_selected)
+	
+	if not new_card.card_selected.is_connected(_on_card_selected):
+		new_card.card_selected.connect(_on_card_selected)
 
 func empty_hand() -> Array[Card]:
 	var remaining_hand = cards.duplicate(true)
 	
-	cards.clear()
+	cards = []
 	
 	return remaining_hand
 
 func _on_card_selected(card: Card) -> void:
 	emit_signal("card_selected", card)
-	cards.erase(card)
+	#cards.erase(card)
 	#remove_child(card)

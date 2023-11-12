@@ -24,11 +24,13 @@ var current_health = max_health :
 		current_health = max(0, current_health)
 		current_health = min(max_health, current_health)
 		_update_health_label()
+		_check_if_alive()
 var upcoming_action: Action :
 	set(value):
 		upcoming_action = value
 		_update_upcoming_action_label()
 var action_bag: Array[Action]
+var defense = 0
 
 enum EnemyType { SPECTER }
 enum Action { ATTACK, DEFEND, HEAL, STATUS }
@@ -44,8 +46,20 @@ func _fill_bag() -> void:
 		action_bag = action_pool.duplicate(true)
 		action_bag.shuffle()
 
-func take_damage(damage: int) -> void:
-	current_health -= damage
+func take_damage(damage_amount: int) -> void:
+	if damage_amount > defense:
+		damage_amount -= defense
+		defense = 0
+	else:
+		defense -= damage_amount
+		damage_amount = 0
+	current_health -= damage_amount
+
+func gain_defense(defense_gain: int) -> void:
+	defense += defense_gain
+
+func gain_health(health_gain: int) -> void:
+	current_health += health_gain
 
 func execute_turn() -> void:
 	upcoming_action_label.visible = false

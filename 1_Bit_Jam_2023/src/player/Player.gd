@@ -14,9 +14,26 @@ var current_health: int = max_health :
 		current_health = min(max_health, current_health)
 		_health_changed()
 
+var defense = 0
+
 func _ready():
 	max_health = start_health
 	current_health = max_health
+
+func take_damage(damage_amount: int) -> void:
+	if damage_amount > defense:
+		damage_amount -= defense
+		defense = 0
+	else:
+		defense -= damage_amount
+		damage_amount = 0
+	current_health -= damage_amount
+
+func gain_defense(defense_gain: int) -> void:
+	defense += defense_gain
+
+func gain_health(health_gain: int) -> void:
+	current_health += health_gain
 
 func _health_changed() -> void:
 	if current_health == 0:

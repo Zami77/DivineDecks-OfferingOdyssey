@@ -2,6 +2,7 @@ class_name CombatManager
 extends Node2D
 
 signal card_moved
+signal hand_emptied
 
 @export var card_play_tween_duration: float = 0.3
 
@@ -15,6 +16,7 @@ signal card_moved
 var player: Player = null
 var enemy: Enemy = null
 var turn_owner: TurnOwner = TurnOwner.PLAYER
+var mid_card_action: bool = false
 
 enum TurnOwner { PLAYER, ENEMY, COMBAT_OVER }
 
@@ -25,15 +27,25 @@ func _ready():
 
 func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType.SPECTER) -> void:
 	player = _player
+	player.player_destroyed.connect(_on_player_destroyed)
 	enemy = EnemyFactory.get_enemy_packed_scene(enemy_type)
 	enemy_area.add_child(enemy)
 	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
+	enemy.action_selected.connect(_on_enemy_action_selected)
 	
 	for card_name in player.deck:
 		deck.add_card_from_name(card_name)
 	
-	_draw_hand()
+	_execute_player_turn()
+
+func _execute_player_turn():
+	if turn_owner == TurnOwner.COMBAT_OVER:
+		return
 	
+	turn_owner = TurnOwner.PLAYER
+	end_turn_button.disabled = false
+	_draw_hand()
+
 func _draw_hand():
 	if deck.cards.size() + discard.cards.size() < hand.hand_size:
 		print("Game Over, not enough cards")
@@ -55,6 +67,7 @@ func _draw_hand():
 				deck.add_card(card)
 
 func _execute_card_action(card: Card) -> void:
+	mid_card_action = true
 	var card_old_global_pos = card.global_position
 	hand.remove_child(card)
 	add_child(card)
@@ -70,6 +83,7 @@ func _execute_card_action(card: Card) -> void:
 	await get_tree().create_timer(0.3).timeout
 	# remove from game
 	remove_child(card)
+	mid_card_action = false
 
 func _move_card(card: Card, end_global_position: Vector2) -> void:
 	var card_pos_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
@@ -77,9 +91,15 @@ func _move_card(card: Card, end_global_position: Vector2) -> void:
 	await card_pos_tween.finished
 	emit_signal("card_moved")
 
-func _execute_end_turn() -> void:
+func _execute_enemy_turn() -> void:
+	if turn_owner == TurnOwner.COMBAT_OVER:
+		return
+		
+	turn_owner = TurnOwner.ENEMY
+	end_turn_button.disabled = true
 	_empty_hand()
-
+	await hand_emptied
+	enemy.execute_turn()
 
 func _empty_hand() -> void:
 	var remaining_cards_in_hand = hand.empty_hand()
@@ -89,25 +109,51 @@ func _empty_hand() -> void:
 		await card_moved
 		hand.remove_child(card)
 		discard.add_card(card)
+	
+	emit_signal("hand_emptied")
 
 func _do_card_action(card: Card) -> void:
 	for card_type in card.card_types:
 		match card_type:
 			Card.CardType.ATTACK:
-				pass
+				enemy.take_damage(card.attack_amount)
 			Card.CardType.DEFEND:
-				pass
+				player.gain_defense(card.defend_amount)
 			Card.CardType.STATUS:
 				pass
 			Card.CardType.HEAL:
-				pass
+				player.gain_health(card.heal_amount)
+
+func _do_enemy_action(action: Enemy.Action) -> void:
+	match action:
+		Enemy.Action.ATTACK:
+			player.take_damage(enemy.attack_amount)
+		Enemy.Action.DEFEND:
+			enemy.gain_defense(enemy.defend_amount)
+		Enemy.Action.STATUS:
+			pass
+		Enemy.Action.HEAL:
+			enemy.gain_health(enemy.heal_amount)
+	
+	await get_tree().create_timer(0.3).timeout
+	_execute_player_turn()
 
 func _on_card_selected_from_hand(card_selected: Card) -> void:
+	if turn_owner == TurnOwner.COMBAT_OVER or mid_card_action:
+		return
+		
 	_execute_card_action(card_selected)
 
 func _on_enemy_destroyed() -> void:
 	turn_owner = TurnOwner.COMBAT_OVER
 	print("Player wins!")
 
+func _on_player_destroyed() -> void:
+	turn_owner = TurnOwner.COMBAT_OVER
+	print("Enemy wins!")
+
 func _on_end_turn_button_pressed() -> void:
-	_execute_end_turn()
+	_execute_enemy_turn()
+
+func _on_enemy_action_selected(action: Enemy.Action) -> void:
+	_do_enemy_action(action)
