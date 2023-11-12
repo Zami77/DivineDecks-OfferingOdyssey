@@ -1,15 +1,18 @@
 class_name CombatManager
 extends Node2D
 
+@export var card_play_tween_duration: float = 0.3
 
 @onready var deck: Deck = $Deck
 @onready var discard: Deck = $Discard
 @onready var hand: CardHand = $Hand
+@onready var card_play_area: Node2D = $CardPlayArea
 
 var player: Player = null
 
 func _ready():
 	DataManager.save_game()
+	hand.card_selected.connect(_on_card_selected_from_hand)
 
 func setup_combat(_player: Player) -> void:
 	player = _player
@@ -28,8 +31,45 @@ func _draw_hand():
 	
 	while cards_drawn < hand.hand_size:
 		if deck.cards.size() > 0:
-			hand.add_card(deck.draw())
+			var drawn_card = deck.draw()
+			hand.add_card(drawn_card)
 			cards_drawn += 1
 		else:
-			# TODO: take cards from discard and put them into the deck
-			pass
+			var discard_cards: Array[Card] = []
+			while discard.cards.size() > 0:
+				discard_cards.append(discard.draw())
+			# TODO: add animation going to deck location
+			for card in discard_cards:
+				deck.add_card(card)
+
+func _execute_card_action(card: Card) -> void:
+	var card_old_global_pos = card.global_position
+	hand.remove_child(card)
+	add_child(card)
+	card.global_position = card_old_global_pos
+	
+	# move to card play area
+	var card_pos_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
+	card_pos_tween.tween_property(card, "global_position", card_play_area, card_play_tween_duration)
+	await card_pos_tween.finished
+	
+	# do card action
+	_do_card_action(card)
+	
+	# remove from game
+	remove_child(card)
+
+func _do_card_action(card: Card) -> void:
+	for card_type in card.card_types:
+		match card_type:
+			Card.CardType.ATTACK:
+				pass
+			Card.CardType.DEFEND:
+				pass
+			Card.CardType.STATUS:
+				pass
+			Card.CardType.HEAL:
+				pass
+
+func _on_card_selected_from_hand(card_selected: Card) -> void:
+	_execute_card_action(card_selected)
