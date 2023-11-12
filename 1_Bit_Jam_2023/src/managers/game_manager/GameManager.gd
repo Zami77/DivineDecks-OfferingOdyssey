@@ -33,6 +33,7 @@ func _load_scene(scene_path: String):
 	
 	if current_scene is CombatManager:
 		current_scene.setup_combat(player)
+		current_scene.combat_ended.connect(_on_combat_ended)
 	
 	await transition_screen.faded_to_scene
 
@@ -45,3 +46,10 @@ func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 			_load_scene(ScenePaths.combat_manager)
 		MainMenu.Option.EXIT_GAME:
 			get_tree().quit()
+
+func _on_combat_ended(combat_winner: CombatManager.TurnOwner) -> void:
+	match combat_winner:
+		CombatManager.TurnOwner.PLAYER:
+			_load_scene(ScenePaths.combat_manager)
+		CombatManager.TurnOwner.ENEMY:
+			_load_scene(ScenePaths.main_menu) 

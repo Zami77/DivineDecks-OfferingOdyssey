@@ -3,6 +3,7 @@ extends Node2D
 
 signal card_moved
 signal hand_emptied
+signal combat_ended(winner: TurnOwner)
 
 @export var card_play_tween_duration: float = 0.3
 
@@ -12,10 +13,12 @@ signal hand_emptied
 @onready var card_play_area: Node2D = $CardPlayArea
 @onready var enemy_area: Node2D = $EnemyArea
 @onready var end_turn_button: DefaultButton = $EndTurnButton
+@onready var combat_end_panel: CombatEndPanel = $CombatEndPanel
 
 var player: Player = null
 var enemy: Enemy = null
 var turn_owner: TurnOwner = TurnOwner.PLAYER
+var match_winner: TurnOwner = TurnOwner.PLAYER
 var mid_card_action: bool = false
 
 enum TurnOwner { PLAYER, ENEMY, COMBAT_OVER }
@@ -24,6 +27,7 @@ func _ready():
 	DataManager.save_game()
 	hand.card_selected.connect(_on_card_selected_from_hand)
 	end_turn_button.pressed.connect(_on_end_turn_button_pressed)
+	combat_end_panel.end_combat_selected.connect(_on_end_combat_selected)
 
 func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType.SPECTER) -> void:
 	player = _player
@@ -138,6 +142,11 @@ func _do_enemy_action(action: Enemy.Action) -> void:
 	await get_tree().create_timer(0.3).timeout
 	_execute_player_turn()
 
+func _end_combat() -> void:
+	turn_owner = TurnOwner.COMBAT_OVER
+	combat_end_panel.set_winner_label(match_winner)
+	combat_end_panel.visible = true
+
 func _on_card_selected_from_hand(card_selected: Card) -> void:
 	if turn_owner == TurnOwner.COMBAT_OVER or mid_card_action:
 		return
@@ -145,15 +154,18 @@ func _on_card_selected_from_hand(card_selected: Card) -> void:
 	_execute_card_action(card_selected)
 
 func _on_enemy_destroyed() -> void:
-	turn_owner = TurnOwner.COMBAT_OVER
-	print("Player wins!")
+	match_winner = TurnOwner.PLAYER
+	_end_combat()
 
 func _on_player_destroyed() -> void:
-	turn_owner = TurnOwner.COMBAT_OVER
-	print("Enemy wins!")
+	match_winner = TurnOwner.ENEMY
+	_end_combat()
 
 func _on_end_turn_button_pressed() -> void:
 	_execute_enemy_turn()
 
 func _on_enemy_action_selected(action: Enemy.Action) -> void:
 	_do_enemy_action(action)
+
+func _on_end_combat_selected() -> void:
+	emit_signal("combat_ended", match_winner)

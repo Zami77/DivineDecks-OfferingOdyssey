@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck45dg212r6ji"]
+[gd_scene load_steps=7 format=3 uid="uid://ck45dg212r6ji"]
 
 [ext_resource type="PackedScene" uid="uid://cneuuoth3bny" path="res://src/deck/Deck.tscn" id="1_4f8vu"]
 [ext_resource type="Script" path="res://src/managers/combat_manager/CombatManager.gd" id="1_jj8pp"]
 [ext_resource type="PackedScene" uid="uid://ctd586lfoxfcu" path="res://src/managers/combat_manager/Hand.tscn" id="3_467sl"]
 [ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="4_q0qis"]
 [ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="5_82jrc"]
+[ext_resource type="PackedScene" uid="uid://cgkvcpap2sn0o" path="res://src/ui/combat_end_panel/CombatEndPanel.tscn" id="6_5igk6"]
 
 [node name="CombatManager" type="Node2D"]
 script = ExtResource("1_jj8pp")
@@ -48,3 +49,10 @@ theme = ExtResource("4_q0qis")
 [node name="PlayerHealthLabel" type="Label" parent="PlayerStatsContainer"]
 layout_mode = 2
 text = "Health"
+
+[node name="CombatEndPanel" parent="." instance=ExtResource("6_5igk6")]
+visible = false
+offset_left = 200.0
+offset_top = 552.0
+offset_right = 520.0
+offset_bottom = 744.0

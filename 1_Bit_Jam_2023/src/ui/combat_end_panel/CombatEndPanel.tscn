@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgkvcpap2sn0o"]
+
+[ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="1_r2rog"]
+[ext_resource type="Script" path="res://src/ui/combat_end_panel/CombatEndPanel.gd" id="2_5gqe6"]
+[ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="2_jvrwx"]
+
+[node name="CombatEndPanel" type="Panel"]
+offset_right = 320.0
+offset_bottom = 192.0
+theme = ExtResource("1_r2rog")
+script = ExtResource("2_5gqe6")
+
+[node name="vBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 312.0
+offset_bottom = 184.0
+alignment = 1
+
+[node name="WinnerLabel" type="Label" parent="vBoxContainer"]
+layout_mode = 2
+text = "Player Wins!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndMatchButton" type="Button" parent="vBoxContainer"]
+layout_mode = 2
+text = "End Match"
+script = ExtResource("2_jvrwx")
