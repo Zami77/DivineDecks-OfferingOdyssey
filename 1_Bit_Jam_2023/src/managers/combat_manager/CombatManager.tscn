@@ -6,6 +6,7 @@
 
 [node name="CombatManager" type="Node2D"]
 script = ExtResource("1_jj8pp")
+card_play_tween_duration = 0.25
 
 [node name="ColorRect" type="TextureRect" parent="."]
 offset_right = 720.0
@@ -22,4 +23,7 @@ deck_type = 1
 position = Vector2(80, 816)
 
 [node name="CardPlayArea" type="Node2D" parent="."]
-position = Vector2(320, 640)
+position = Vector2(256, 640)
+
+[node name="EnemyArea" type="Node2D" parent="."]
+position = Vector2(96, 0)

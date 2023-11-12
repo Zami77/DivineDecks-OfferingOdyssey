@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8ruwej0lwey0"]
+
+[ext_resource type="PackedScene" uid="uid://cts7km825n2ko" path="res://src/enemies/Enemy.tscn" id="1_4ak21"]
+[ext_resource type="Texture2D" uid="uid://tg5fjsuc8hxv" path="res://src/enemies/pixel_monsters_1_by_theartofnemo/BW/Specter.png" id="2_rne6o"]
+
+[node name="Specter" instance=ExtResource("1_4ak21")]
+enemy_texture = ExtResource("2_rne6o")
+attack_amount = 1
