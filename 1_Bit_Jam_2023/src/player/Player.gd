@@ -5,6 +5,7 @@ signal player_destroyed
 signal health_updated
 
 @export var deck: Array[Card.CardName] = []
+@export var class_type: ClassType = ClassType.KNIGHT
 @export var start_health: int = 8
 
 var max_health: int = start_health
@@ -16,6 +17,8 @@ var current_health: int = max_health :
 		_health_changed()
 
 var defense = 0
+
+enum ClassType { KNIGHT }
 
 func _ready():
 	max_health = start_health
