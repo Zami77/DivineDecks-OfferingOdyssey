@@ -8,6 +8,7 @@ signal end_combat_selected
 
 func _ready():
 	end_match_button.pressed.connect(_on_end_match_button_pressed)
+	z_index = ZIndexPosition.combat_end_panel
 
 func set_winner_label(match_winner: CombatManager.TurnOwner) -> void:
 	match match_winner:

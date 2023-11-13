@@ -16,6 +16,7 @@ signal combat_ended(winner: TurnOwner)
 @onready var end_turn_button: DefaultButton = $EndTurnButton
 @onready var combat_end_panel: CombatEndPanel = $CombatEndPanel
 @onready var player_health_label: Label = $PlayerStatsContainer/PlayerHealthLabel
+@onready var player_texture_rect: TextureRect = $PlayerTextureRect
 
 var player: Player = null
 var enemy: Enemy = null
@@ -33,20 +34,31 @@ func _ready():
 	end_turn_button.disabled = true
 
 func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType.SPECTER) -> void:
-	player = _player
-	player.player_destroyed.connect(_on_player_destroyed)
-	player.health_updated.connect(_on_player_health_updated)
-	_on_player_health_updated()
-	
-	enemy = EnemyFactory.get_enemy_packed_scene(enemy_type)
-	enemy_area.add_child(enemy)
-	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
-	enemy.action_selected.connect(_on_enemy_action_selected)
+	_init_player(_player)
+	_init_enemy(enemy_type)
 	
 	for card_name in player.deck:
 		deck.add_card_from_name(card_name)
 	
 	_execute_player_turn()
+
+func _init_player(_player: Player):
+	player = _player
+	player.player_destroyed.connect(_on_player_destroyed)
+	player.health_updated.connect(_on_player_health_updated)
+	_on_player_health_updated()
+	_set_player_texture_rect()
+
+func _set_player_texture_rect() -> void:
+	match player.class_type:
+		Player.ClassType.KNIGHT:
+			player_texture_rect.texture = Textures.knight_portrait
+
+func _init_enemy(enemy_type: Enemy.EnemyType) -> void:
+	enemy = EnemyFactory.get_enemy_packed_scene(enemy_type)
+	enemy_area.add_child(enemy)
+	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
+	enemy.action_selected.connect(_on_enemy_action_selected)
 
 func _execute_player_turn():
 	if turn_owner == TurnOwner.COMBAT_OVER:
@@ -120,8 +132,9 @@ func _execute_enemy_turn() -> void:
 		
 	turn_owner = TurnOwner.ENEMY
 	end_turn_button.disabled = true
-	_empty_hand()
-	await hand_emptied
+	if not hand.is_empty():
+		_empty_hand()
+		await hand_emptied
 	enemy.execute_turn()
 
 func _empty_hand() -> void:

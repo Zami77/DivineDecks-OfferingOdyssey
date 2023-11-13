@@ -38,6 +38,9 @@ func remove_card(card: Card) -> void:
 	cards.erase(card)
 	remove_child(card)
 
+func is_empty() -> bool:
+	return cards.size() == 0
+
 func _on_card_selected(card: Card) -> void:
 	emit_signal("card_selected", card)
 
