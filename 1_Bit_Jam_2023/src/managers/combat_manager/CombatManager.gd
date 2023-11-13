@@ -36,6 +36,8 @@ func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType
 	player = _player
 	player.player_destroyed.connect(_on_player_destroyed)
 	player.health_updated.connect(_on_player_health_updated)
+	_on_player_health_updated()
+	
 	enemy = EnemyFactory.get_enemy_packed_scene(enemy_type)
 	enemy_area.add_child(enemy)
 	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
@@ -70,6 +72,7 @@ func _draw_hand():
 			
 			deck.remove_child(drawn_card)
 			hand.add_card(drawn_card)
+			await hand.card_moved
 			cards_drawn += 1
 		else:
 			var discard_cards: Array[Card] = []
@@ -84,7 +87,7 @@ func _draw_hand():
 func _execute_card_action(card: Card) -> void:
 	mid_card_action = true
 	var card_old_global_pos = card.global_position
-	hand.remove_child(card)
+	hand.remove_card(card)
 	add_child(card)
 	card.global_position = card_old_global_pos
 	
@@ -127,7 +130,7 @@ func _empty_hand() -> void:
 	for card in remaining_cards_in_hand:
 		_move_card(card, discard.global_position)
 		await card_moved
-		hand.remove_child(card)
+		hand.remove_card(card)
 		discard.add_card(card)
 	
 	emit_signal("hand_emptied")
@@ -164,7 +167,7 @@ func _end_combat() -> void:
 	combat_end_panel.visible = true
 
 func _on_card_selected_from_hand(card_selected: Card) -> void:
-	if turn_owner == TurnOwner.COMBAT_OVER or mid_card_action:
+	if turn_owner == TurnOwner.COMBAT_OVER or turn_owner == TurnOwner.ENEMY or mid_card_action or end_turn_button.disabled:
 		return
 		
 	_execute_card_action(card_selected)

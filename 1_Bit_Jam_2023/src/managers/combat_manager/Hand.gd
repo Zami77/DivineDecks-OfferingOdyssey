@@ -8,12 +8,14 @@ signal card_moved
 static var hand_size: int = 3
 var cards: Array[Card] = []
 var card_buffer: int = 16
+var cards_moving = false
 
 func add_card(new_card: Card) -> void:
+	cards_moving = true
 	cards.append(new_card)
 	add_child(new_card)
 	new_card.global_position = global_position
-	var new_position_x = (cards.size() - 1) * Dimensions.card_width
+	var new_position_x = (cards.size() - 1) * Dimensions.card_width 
 	
 	var card_pos_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
 	card_pos_tween.tween_property(new_card, "position", new_card.position + Vector2(new_position_x, 0), 0.2)
@@ -23,6 +25,7 @@ func add_card(new_card: Card) -> void:
 
 	await card_pos_tween.finished
 	emit_signal("card_moved")
+	cards_moving = false
 	
 func empty_hand() -> Array[Card]:
 	var remaining_hand = cards.duplicate(true)
@@ -31,7 +34,10 @@ func empty_hand() -> Array[Card]:
 	
 	return remaining_hand
 
+func remove_card(card: Card) -> void:
+	cards.erase(card)
+	remove_child(card)
+
 func _on_card_selected(card: Card) -> void:
 	emit_signal("card_selected", card)
-	cards.erase(card)
-	#remove_child(card)
+
