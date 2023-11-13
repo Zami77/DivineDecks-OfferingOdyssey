@@ -2,6 +2,7 @@ class_name Card
 extends Node2D
 
 signal card_selected(card: Card)
+signal card_used
 
 @export var card_image_texture: Texture
 @export var card_types: Array[CardType] = [CardType.ATTACK]
@@ -15,6 +16,7 @@ signal card_selected(card: Card)
 @onready var card_image: TextureRect = $CardImage
 @onready var card_text: Label = $CardText
 @onready var selectable_area: Area2D = $SelectableArea
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 enum CardType { ATTACK, DEFEND, STATUS, HEAL }
@@ -44,6 +46,11 @@ func _setup_card_text() -> void:
 			CardType.HEAL:
 				card_text.text += "heals %d health to player" % heal_amount
 		card_text.text += "\n"
+
+func use_card() -> void:
+	animation_player.play("card_used")
+	await animation_player.animation_finished
+	emit_signal("card_used")
 
 func _on_selectable_are_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("click"):

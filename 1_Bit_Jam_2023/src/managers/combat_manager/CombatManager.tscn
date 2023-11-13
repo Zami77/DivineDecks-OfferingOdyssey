@@ -15,10 +15,10 @@ offset_right = 720.0
 offset_bottom = 1080.0
 
 [node name="Deck" parent="." instance=ExtResource("1_4f8vu")]
-position = Vector2(16, 640)
+position = Vector2(-48, 640)
 
 [node name="Discard" parent="." instance=ExtResource("1_4f8vu")]
-position = Vector2(576, 640)
+position = Vector2(776, 640)
 deck_type = 1
 
 [node name="Hand" parent="." instance=ExtResource("3_467sl")]

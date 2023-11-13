@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cefig786rswxy"]
 
 [ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_j67qe"]
-[ext_resource type="Texture2D" uid="uid://bp1ljraeys60g" path="res://src/cards/defend_cards/defend.png" id="2_dyrhy"]
+[ext_resource type="Texture2D" uid="uid://cso10ill12vco" path="res://src/cards/defend_cards/oryx_shield.png" id="2_6odrp"]
 
 [node name="DefendHelmetCard" instance=ExtResource("1_j67qe")]
-card_image_texture = ExtResource("2_dyrhy")
+card_image_texture = ExtResource("2_6odrp")
 card_types = Array[int]([1])
 defend_amount = 3

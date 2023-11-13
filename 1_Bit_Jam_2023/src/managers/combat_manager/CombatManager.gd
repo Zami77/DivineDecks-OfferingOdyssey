@@ -3,6 +3,7 @@ extends Node2D
 
 signal card_moved
 signal hand_emptied
+signal hand_drawn
 signal combat_ended(winner: TurnOwner)
 
 @export var card_play_tween_duration: float = 0.3
@@ -14,6 +15,7 @@ signal combat_ended(winner: TurnOwner)
 @onready var enemy_area: Node2D = $EnemyArea
 @onready var end_turn_button: DefaultButton = $EndTurnButton
 @onready var combat_end_panel: CombatEndPanel = $CombatEndPanel
+@onready var player_health_label: Label = $PlayerStatsContainer/PlayerHealthLabel
 
 var player: Player = null
 var enemy: Enemy = null
@@ -28,10 +30,12 @@ func _ready():
 	hand.card_selected.connect(_on_card_selected_from_hand)
 	end_turn_button.pressed.connect(_on_end_turn_button_pressed)
 	combat_end_panel.end_combat_selected.connect(_on_end_combat_selected)
+	end_turn_button.disabled = true
 
 func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType.SPECTER) -> void:
 	player = _player
 	player.player_destroyed.connect(_on_player_destroyed)
+	player.health_updated.connect(_on_player_health_updated)
 	enemy = EnemyFactory.get_enemy_packed_scene(enemy_type)
 	enemy_area.add_child(enemy)
 	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
@@ -47,8 +51,9 @@ func _execute_player_turn():
 		return
 	
 	turn_owner = TurnOwner.PLAYER
-	end_turn_button.disabled = false
 	_draw_hand()
+	await hand_drawn
+	end_turn_button.disabled = false
 
 func _draw_hand():
 	if deck.cards.size() + discard.cards.size() < hand.hand_size:
@@ -60,6 +65,10 @@ func _draw_hand():
 	while cards_drawn < hand.hand_size:
 		if deck.cards.size() > 0:
 			var drawn_card = deck.draw()
+			_move_card(drawn_card, hand.global_position)
+			await card_moved
+			
+			deck.remove_child(drawn_card)
 			hand.add_card(drawn_card)
 			cards_drawn += 1
 		else:
@@ -69,6 +78,8 @@ func _draw_hand():
 			# TODO: add animation going to deck location
 			for card in discard_cards:
 				deck.add_card(card)
+	
+	emit_signal("hand_drawn")
 
 func _execute_card_action(card: Card) -> void:
 	mid_card_action = true
@@ -85,8 +96,13 @@ func _execute_card_action(card: Card) -> void:
 	_do_card_action(card)
 	
 	await get_tree().create_timer(0.3).timeout
+	
+	card.use_card()
+	await card.card_used
+	
 	# remove from game
 	remove_child(card)
+	card.queue_free()
 	mid_card_action = false
 
 func _move_card(card: Card, end_global_position: Vector2) -> void:
@@ -169,3 +185,6 @@ func _on_enemy_action_selected(action: Enemy.Action) -> void:
 
 func _on_end_combat_selected() -> void:
 	emit_signal("combat_ended", match_winner)
+
+func _on_player_health_updated() -> void:
+	player_health_label.text = "Health: %d/%d" % [player.current_health, player.max_health]

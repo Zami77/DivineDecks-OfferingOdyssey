@@ -6,11 +6,14 @@ extends Node2D
 
 @onready var deck_texture_rect: TextureRect = $DeckTextureRect
 	
-var cards: Array[Card] 
+var cards: Array[Card]
+var rng = RandomNumberGenerator.new()
 
 enum DeckType { DECK, DISCARD }
 
 func _ready():
+	rng.randomize()
+	
 	for card_name in card_names:
 		add_card_from_name(card_name)
 	cards.shuffle()
@@ -30,9 +33,9 @@ func shuffle() -> void:
 	cards.shuffle()
 
 func draw() -> Card:
-	var drawn_card = cards.pop_front()
+	var drawn_card = cards.pop_at(rng.randi_range(0, cards.size() - 1))
 	drawn_card.visible = true
-	remove_child(drawn_card)
+	#remove_child(drawn_card)
 	_check_visibility()
 	return drawn_card
 
@@ -41,6 +44,7 @@ func add_card(new_card: Card) -> void:
 	add_child(new_card)
 	new_card.visible = false
 	_check_visibility()
+	cards.shuffle()
 
 func add_card_from_name(card_name: Card.CardName) -> void:
 	var card = CardFactory.get_card_packed_scene(card_name)

@@ -1,11 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxq1cmjy53rb6"]
 
 [ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_xkihp"]
-[ext_resource type="Texture2D" uid="uid://b3cgdhenay544" path="res://src/cards/attack_cards/sword.png" id="2_jo6m7"]
+[ext_resource type="Texture2D" uid="uid://rb0q6lf6xbg" path="res://src/cards/attack_cards/oryx_sword.png" id="2_bbwmf"]
 
 [node name="AttackSwordCard" instance=ExtResource("1_xkihp")]
-card_image_texture = ExtResource("2_jo6m7")
+card_image_texture = ExtResource("2_bbwmf")
 attack_amount = 2
+
+[node name="CardImage" parent="." index="1"]
+offset_left = 16.0
+offset_right = 176.0
+offset_bottom = 168.0
 
 [node name="CardText" parent="." index="2"]
 autowrap_mode = 3

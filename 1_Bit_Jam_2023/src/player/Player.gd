@@ -2,6 +2,7 @@ class_name Player
 extends Node2D
 
 signal player_destroyed
+signal health_updated
 
 @export var deck: Array[Card.CardName] = []
 @export var start_health: int = 8
@@ -36,5 +37,6 @@ func gain_health(health_gain: int) -> void:
 	current_health += health_gain
 
 func _health_changed() -> void:
+	emit_signal("health_updated")
 	if current_health == 0:
 		emit_signal("player_destroyed")
