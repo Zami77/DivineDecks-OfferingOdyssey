@@ -97,6 +97,7 @@ func _draw_hand():
 	emit_signal("hand_drawn")
 
 func _execute_card_action(card: Card) -> void:
+	end_turn_button.disabled = true
 	mid_card_action = true
 	var card_old_global_pos = card.global_position
 	hand.remove_card(card)
@@ -119,6 +120,7 @@ func _execute_card_action(card: Card) -> void:
 	remove_child(card)
 	card.queue_free()
 	mid_card_action = false
+	end_turn_button.disabled = false
 
 func _move_card(card: Card, end_global_position: Vector2) -> void:
 	var card_pos_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
