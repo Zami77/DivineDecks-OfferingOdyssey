@@ -19,6 +19,7 @@ signal combat_ended(winner: TurnOwner)
 @onready var player_defense_label: Label = $PlayerStatsContainer/PlayerDefenseLabel
 @onready var player_status_label: Label = $PlayerStatsContainer/PlayerStatusLabel
 @onready var player_texture_rect: TextureRect = $PlayerTextureRect
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var player: Player = null
 var enemy: Enemy = null
@@ -48,6 +49,7 @@ func _init_player(_player: Player):
 	player = _player
 	player.player_destroyed.connect(_on_player_destroyed)
 	player.stats_updated.connect(_on_player_stats_updated)
+	player.took_damage.connect(_on_player_took_damage)
 	_on_player_stats_updated()
 	_set_player_texture_rect()
 
@@ -211,3 +213,5 @@ func _on_player_stats_updated() -> void:
 	player_defense_label.text = "Defense: %d" % [player.defense]
 	player_status_label.text = "Status: %s" % ["Healthy"]
 
+func _on_player_took_damage() -> void:
+	animation_player.play("player_take_damage")
