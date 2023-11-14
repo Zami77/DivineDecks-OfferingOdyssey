@@ -45,6 +45,14 @@ func gain_defense(defense_gain: int) -> void:
 func gain_health(health_gain: int) -> void:
 	current_health += health_gain
 
+func save_game() -> void:
+	DataManager.game_data.player_data['current_health'] = current_health
+	DataManager.game_data.player_data['max_health'] = max_health
+	DataManager.game_data.player_data['deck'] = deck
+	DataManager.game_data.player_data['class_type'] = class_type
+	
+	DataManager.save_game()
+
 func _stats_changed() -> void:
 	emit_signal("stats_updated")
 	if current_health == 0:

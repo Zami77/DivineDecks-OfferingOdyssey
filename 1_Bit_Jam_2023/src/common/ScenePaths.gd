@@ -3,6 +3,7 @@ extends Node
 
 static var combat_manager = "res://src/managers/combat_manager/CombatManager.tscn"
 static var main_menu = "res://src/ui/main_menu/MainMenu.tscn"
+static var overworld_manager = "res://src/managers/overworld_manager/OverworldManager.tscn"
 
 static var start_deck = "res://src/deck/start_deck/StartDeck.tscn"
 

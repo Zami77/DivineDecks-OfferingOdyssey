@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://ry6nwwl2e4vm"]
+
+[ext_resource type="Script" path="res://src/managers/overworld_manager/OverworldManager.gd" id="1_tqpex"]
+[ext_resource type="PackedScene" uid="uid://nxpft531qbuj" path="res://src/managers/overworld_manager/overworld_node/OverworldNode.tscn" id="2_57xh2"]
+[ext_resource type="PackedScene" uid="uid://crwug5jfc3efe" path="res://src/managers/overworld_manager/player_token/PlayerToken.tscn" id="3_e6gnu"]
+
+[node name="OverworldManager" type="Node2D"]
+script = ExtResource("1_tqpex")
+
+[node name="OverworldNodesHolder" type="Node2D" parent="."]
+
+[node name="OverworldNode" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
+position = Vector2(320, 960)
+
+[node name="OverworldNode2" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
+position = Vector2(320, 704)
+
+[node name="OverworldNode3" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
+position = Vector2(128, 768)
+
+[node name="OverworldNode4" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
+position = Vector2(128, 384)
+
+[node name="OverworldNode5" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
+position = Vector2(448, 448)
+
+[node name="OverworldNode6" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
+position = Vector2(320, 192)
+
+[node name="Line2D" type="Line2D" parent="."]
+
+[node name="PlayerToken" parent="." instance=ExtResource("3_e6gnu")]
+position = Vector2(320, 960)

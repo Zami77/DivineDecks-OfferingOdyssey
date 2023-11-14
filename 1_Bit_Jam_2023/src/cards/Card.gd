@@ -27,7 +27,7 @@ func _ready():
 	_setup_card_image()
 	_setup_card_text()
 	
-	selectable_area.input_event.connect(_on_selectable_are_input_event)
+	selectable_area.input_event.connect(_on_selectable_area_input_event)
 
 func _setup_card_image() -> void:
 	card_image.texture = card_image_texture
@@ -52,6 +52,6 @@ func use_card() -> void:
 	await animation_player.animation_finished
 	emit_signal("card_used")
 
-func _on_selectable_are_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+func _on_selectable_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("click"):
 		emit_signal("card_selected", self)

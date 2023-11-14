@@ -2,22 +2,15 @@ extends Node
 
 var save_filename = "user://game_data.save"
 
-var player_data = {
-
-}
-
-var settings = {
-	
-}
-
-var achievements = {
-	
-}
 
 var game_data = {
-	"player_data": player_data,
-	"settings": settings,
-	"achievements": achievements
+	"player_data": {},
+	"overworld_data": {
+		"player_at_node": 0,
+		"overworld_nodes": {}
+	},
+	"settings": {},
+	"persistent_data": {}
 }
 
 func _ready():
@@ -39,6 +32,10 @@ func load_game() -> void:
 		return
 	
 	var save_data_json = JSON.parse_string(save_file_text)
+	
+	if not save_data_json:
+		push_error("save_data was null")
+		return
 	
 	game_data = save_data_json
 	

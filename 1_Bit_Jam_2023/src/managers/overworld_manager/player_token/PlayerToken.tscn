@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://crwug5jfc3efe"]
+
+[ext_resource type="Script" path="res://src/managers/overworld_manager/player_token/PlayerToken.gd" id="1_64n3o"]
+[ext_resource type="Texture2D" uid="uid://7dmrckohfbep" path="res://src/player/knight_portrait.png" id="2_ygdhs"]
+
+[sub_resource type="Animation" id="Animation_48j10"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8), Vector2(0, 0), Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dm0eg"]
+_data = {
+"idle": SubResource("Animation_48j10")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgsj0"]
+size = Vector2(64, 64)
+
+[node name="PlayerToken" type="Node2D"]
+z_index = 1
+script = ExtResource("1_64n3o")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 72.0
+offset_bottom = 72.0
+texture = ExtResource("2_ygdhs")
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect"]
+z_index = -1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 72.0
+offset_bottom = 72.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dm0eg")
+}
+
+[node name="SelectableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableArea"]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_kgsj0")
