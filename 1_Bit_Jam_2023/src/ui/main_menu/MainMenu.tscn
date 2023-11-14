@@ -31,7 +31,6 @@ script = ExtResource("2_drprm")
 
 [node name="ContinueRunButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-disabled = true
 text = "Continue Run"
 script = ExtResource("2_drprm")
 

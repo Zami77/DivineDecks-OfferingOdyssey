@@ -1,8 +1,35 @@
 {
-	"achievements": {
-
-	},
 	"overworld_data": {
+		"overworld_nodes": {
+			"1": {
+				"completed": true,
+				"enemy_type": 0
+			},
+			"2": {
+				"completed": false,
+				"enemy_type": 0
+			},
+			"3": {
+				"completed": false,
+				"enemy_type": 0
+			},
+			"4": {
+				"completed": false,
+				"enemy_type": 0
+			},
+			"5": {
+				"completed": false,
+				"enemy_type": 0
+			},
+			"6": {
+				"completed": false,
+				"enemy_type": 0
+			}
+		},
+		"player_at_node": 1,
+		"world_id": "overworld_1"
+	},
+	"persistent_data": {
 
 	},
 	"player_data": {
