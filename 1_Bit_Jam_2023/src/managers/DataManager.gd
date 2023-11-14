@@ -2,22 +2,12 @@ extends Node
 
 var save_filename = "user://game_data.save"
 
-var player_data = {
-
-}
-
-var settings = {
-	
-}
-
-var achievements = {
-	
-}
 
 var game_data = {
-	"player_data": player_data,
-	"settings": settings,
-	"achievements": achievements
+	"player_data": {},
+	"overworld_data": {},
+	"settings": {},
+	"achievements": {}
 }
 
 func _ready():

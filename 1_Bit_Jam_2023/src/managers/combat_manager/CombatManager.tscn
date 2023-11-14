@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="4_q0qis"]
 [ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="5_82jrc"]
 [ext_resource type="PackedScene" uid="uid://cgkvcpap2sn0o" path="res://src/ui/combat_end_panel/CombatEndPanel.tscn" id="6_5igk6"]
-[ext_resource type="Texture2D" path="res://src/player/knight_portrait.png" id="7_7jfgp"]
+[ext_resource type="Texture2D" uid="uid://7dmrckohfbep" path="res://src/player/knight_portrait.png" id="7_7jfgp"]
 
 [sub_resource type="Animation" id="Animation_toflt"]
 resource_name = "player_take_damage"

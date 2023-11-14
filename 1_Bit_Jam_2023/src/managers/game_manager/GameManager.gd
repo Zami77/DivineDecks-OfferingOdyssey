@@ -43,13 +43,13 @@ func _on_load_scene(scene_path) -> void:
 func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 	match option:
 		MainMenu.Option.START_RUN:
-			_load_scene(ScenePaths.combat_manager)
+			_load_scene(ScenePaths.overworld_manager)
 		MainMenu.Option.EXIT_GAME:
 			get_tree().quit()
 
 func _on_combat_ended(combat_winner: CombatManager.TurnOwner) -> void:
 	match combat_winner:
 		CombatManager.TurnOwner.PLAYER:
-			_load_scene(ScenePaths.combat_manager)
+			_load_scene(ScenePaths.overworld_manager)
 		CombatManager.TurnOwner.ENEMY:
 			_load_scene(ScenePaths.main_menu) 

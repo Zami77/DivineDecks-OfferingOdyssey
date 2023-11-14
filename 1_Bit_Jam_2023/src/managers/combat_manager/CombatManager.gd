@@ -52,6 +52,7 @@ func _init_player(_player: Player):
 	player.took_damage.connect(_on_player_took_damage)
 	_on_player_stats_updated()
 	_set_player_texture_rect()
+	player.save_game()
 
 func _set_player_texture_rect() -> void:
 	match player.class_type:
