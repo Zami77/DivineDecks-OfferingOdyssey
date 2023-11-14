@@ -2,7 +2,7 @@ class_name Player
 extends Node2D
 
 signal player_destroyed
-signal health_updated
+signal stats_updated
 
 @export var deck: Array[Card.CardName] = []
 @export var class_type: ClassType = ClassType.KNIGHT
@@ -14,9 +14,13 @@ var current_health: int = max_health :
 		current_health = value
 		current_health = max(0, current_health)
 		current_health = min(max_health, current_health)
-		_health_changed()
+		_stats_changed()
 
-var defense = 0
+var defense: int = 0 :
+	set(value):
+		defense = value
+		_stats_changed()
+var statuses: Array[Card.StatusEffect] = []
 
 enum ClassType { KNIGHT }
 
@@ -39,7 +43,8 @@ func gain_defense(defense_gain: int) -> void:
 func gain_health(health_gain: int) -> void:
 	current_health += health_gain
 
-func _health_changed() -> void:
-	emit_signal("health_updated")
+func _stats_changed() -> void:
+	emit_signal("stats_updated")
 	if current_health == 0:
 		emit_signal("player_destroyed")
+

@@ -13,9 +13,11 @@ signal combat_ended(winner: TurnOwner)
 @onready var hand: CardHand = $Hand
 @onready var card_play_area: Node2D = $CardPlayArea
 @onready var enemy_area: Node2D = $EnemyArea
-@onready var end_turn_button: DefaultButton = $EndTurnButton
+@onready var end_turn_button: DefaultButton = $PlayerStatsContainer/EndTurnButton
 @onready var combat_end_panel: CombatEndPanel = $CombatEndPanel
 @onready var player_health_label: Label = $PlayerStatsContainer/PlayerHealthLabel
+@onready var player_defense_label: Label = $PlayerStatsContainer/PlayerDefenseLabel
+@onready var player_status_label: Label = $PlayerStatsContainer/PlayerStatusLabel
 @onready var player_texture_rect: TextureRect = $PlayerTextureRect
 
 var player: Player = null
@@ -45,8 +47,8 @@ func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType
 func _init_player(_player: Player):
 	player = _player
 	player.player_destroyed.connect(_on_player_destroyed)
-	player.health_updated.connect(_on_player_health_updated)
-	_on_player_health_updated()
+	player.stats_updated.connect(_on_player_stats_updated)
+	_on_player_stats_updated()
 	_set_player_texture_rect()
 
 func _set_player_texture_rect() -> void:
@@ -204,5 +206,8 @@ func _on_enemy_action_selected(action: Enemy.Action) -> void:
 func _on_end_combat_selected() -> void:
 	emit_signal("combat_ended", match_winner)
 
-func _on_player_health_updated() -> void:
+func _on_player_stats_updated() -> void:
 	player_health_label.text = "Health: %d/%d" % [player.current_health, player.max_health]
+	player_defense_label.text = "Defense: %d" % [player.defense]
+	player_status_label.text = "Status: %s" % ["Healthy"]
+
