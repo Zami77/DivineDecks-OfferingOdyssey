@@ -17,6 +17,7 @@ signal action_selected(action: Action)
 @onready var enemy_image: TextureRect = $EnemyImage
 @onready var health_label: Label = $HealthLabel
 @onready var upcoming_action_label: Label = $UpcomingActionLabel
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var current_health = max_health :
 	set(value):
@@ -47,6 +48,7 @@ func _fill_bag() -> void:
 		action_bag.shuffle()
 
 func take_damage(damage_amount: int) -> void:
+	animation_player.play("take_damage")
 	if damage_amount > defense:
 		damage_amount -= defense
 		defense = 0
@@ -63,6 +65,8 @@ func gain_health(health_gain: int) -> void:
 
 func execute_turn() -> void:
 	upcoming_action_label.visible = false
+	animation_player.play("turn_shake")
+	await animation_player.animation_finished
 	var turn_action: Action = action_bag.pop_back()
 	
 	emit_signal("action_selected", turn_action)

@@ -2,6 +2,7 @@ class_name Player
 extends Node2D
 
 signal player_destroyed
+signal took_damage
 signal stats_updated
 
 @export var deck: Array[Card.CardName] = []
@@ -36,6 +37,7 @@ func take_damage(damage_amount: int) -> void:
 		defense -= damage_amount
 		damage_amount = 0
 	current_health -= damage_amount
+	emit_signal("took_damage")
 
 func gain_defense(defense_gain: int) -> void:
 	defense += defense_gain
