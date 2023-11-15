@@ -65,6 +65,7 @@ func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 			get_tree().quit()
 
 func _on_combat_ended(combat_winner: CombatManager.TurnOwner) -> void:
+	player.save_game()
 	match combat_winner:
 		CombatManager.TurnOwner.PLAYER:
 			run_type = OverworldManager.RunType.CONTINUE_RUN
