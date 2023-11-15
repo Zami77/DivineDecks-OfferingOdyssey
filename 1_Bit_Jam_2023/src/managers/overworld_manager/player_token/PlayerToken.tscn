@@ -41,6 +41,7 @@ texture = ExtResource("2_ygdhs")
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect"]
 z_index = -1
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 72.0

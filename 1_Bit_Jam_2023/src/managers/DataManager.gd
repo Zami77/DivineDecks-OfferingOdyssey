@@ -17,6 +17,11 @@ func _ready():
 	if OS.is_debug_build():
 		save_filename = "res://game_data.save"
 
+func reset_run_data() -> void:
+	game_data.player_data = {}
+	game_data.overworld_data.player_at_node = 0
+	game_data.overworld_data.overworld_nodes = {}
+
 func save_game() -> void:
 	var save_file = FileAccess.open(save_filename, FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(game_data, '\t'))
