@@ -47,6 +47,7 @@ func _load_scene(scene_path: String):
 
 func _reset_run_data() -> void:
 	node_battled_at = -1
+	player._reset_run_stats()
 
 func _on_load_scene(scene_path) -> void:
 	_load_scene(scene_path)
@@ -70,6 +71,7 @@ func _on_combat_ended(combat_winner: CombatManager.TurnOwner) -> void:
 			DataManager.game_data.overworld_data.overworld_nodes[str(node_battled_at)]['completed'] = true
 			_load_scene(ScenePaths.overworld_manager)
 		CombatManager.TurnOwner.ENEMY:
+			DataManager.reset_run_data()
 			_load_scene(ScenePaths.main_menu)
 
 func _on_combat_entered(enemy_type: Enemy.EnemyType, node_id: int) -> void:

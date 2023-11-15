@@ -47,11 +47,13 @@ func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType
 
 func _init_player(_player: Player):
 	player = _player
+	player.defense = 0
 	player.player_destroyed.connect(_on_player_destroyed)
 	player.stats_updated.connect(_on_player_stats_updated)
 	player.took_damage.connect(_on_player_took_damage)
 	_on_player_stats_updated()
 	_set_player_texture_rect()
+	player.load_game()
 	player.save_game()
 
 func _set_player_texture_rect() -> void:
@@ -75,8 +77,10 @@ func _execute_player_turn():
 	end_turn_button.disabled = false
 
 func _draw_hand():
-	if deck.cards.size() + discard.cards.size() < hand.hand_size:
+	if deck.cards.size() + discard.cards.size() <= 0:
 		print("Game Over, not enough cards")
+		match_winner = TurnOwner.ENEMY
+		_end_combat()
 		return
 	
 	var cards_drawn = 0
@@ -97,6 +101,7 @@ func _draw_hand():
 				discard_cards.append(discard.draw())
 			# TODO: add animation going to deck location
 			for card in discard_cards:
+				discard.remove_child(card)
 				deck.add_card(card)
 	
 	emit_signal("hand_drawn")
@@ -122,6 +127,7 @@ func _execute_card_action(card: Card) -> void:
 	await card.card_used
 	
 	# remove from game
+	player.deck.erase(card.card_name)
 	remove_child(card)
 	card.queue_free()
 	mid_card_action = false
