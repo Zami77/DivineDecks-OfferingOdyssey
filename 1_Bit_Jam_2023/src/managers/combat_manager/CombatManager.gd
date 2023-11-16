@@ -14,12 +14,14 @@ signal combat_ended(winner: TurnOwner)
 @onready var card_play_area: Node2D = $CardPlayArea
 @onready var enemy_area: Node2D = $EnemyArea
 @onready var end_turn_button: DefaultButton = $PlayerStatsContainer/EndTurnButton
+@onready var view_discard_button: DefaultButton = $PlayerStatsContainer/ViewDiscardButton
 @onready var combat_end_panel: CombatEndPanel = $CombatEndPanel
 @onready var player_health_label: Label = $PlayerStatsContainer/PlayerHealthLabel
 @onready var player_defense_label: Label = $PlayerStatsContainer/PlayerDefenseLabel
 @onready var player_status_label: Label = $PlayerStatsContainer/PlayerStatusLabel
 @onready var player_texture_rect: TextureRect = $PlayerTextureRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var deck_viewer: DeckViewer = $DeckViewer
 
 var player: Player = null
 var enemy: Enemy = null
@@ -34,6 +36,8 @@ func _ready():
 	hand.card_selected.connect(_on_card_selected_from_hand)
 	end_turn_button.pressed.connect(_on_end_turn_button_pressed)
 	combat_end_panel.end_combat_selected.connect(_on_end_combat_selected)
+	view_discard_button.pressed.connect(_on_view_discard_button_pressed)
+	deck_viewer.close_deck_viewer.connect(_on_close_deck_viewer)
 	end_turn_button.disabled = true
 
 func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType.SPECTER) -> void:
@@ -222,3 +226,15 @@ func _on_player_stats_updated() -> void:
 
 func _on_player_took_damage() -> void:
 	animation_player.play("player_take_damage")
+
+func _on_view_discard_button_pressed() -> void:
+	var discard_card_names: Array[Card.CardName] = []
+	
+	for card in discard.cards:
+		discard_card_names.append(card.card_name)
+		
+	deck_viewer.load_deck(discard_card_names)
+	deck_viewer.visible = true
+
+func _on_close_deck_viewer() -> void:
+	deck_viewer.visible = false

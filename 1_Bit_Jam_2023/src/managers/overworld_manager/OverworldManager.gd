@@ -9,6 +9,8 @@ signal combat_entered(enemy_type: Enemy.EnemyType, node_id: int)
 @onready var line_2d: Line2D = $Line2D
 @onready var overworld_node_holder: Node2D = $OverworldNodesHolder
 @onready var player_token: PlayerToken = $PlayerToken
+@onready var deck_viewer_button: Button = $DeckViewerButton
+@onready var deck_viewer: DeckViewer = $DeckViewer
 
 var player: Player = null
 var overworld_nodes: Dictionary = {}
@@ -29,6 +31,9 @@ func _ready():
 			overworld_nodes[str(node_id)] = node
 			node_id += 1
 			node.overworld_node_selected.connect(_on_overworld_node_selected)
+	
+	deck_viewer_button.pressed.connect(_on_deck_viewer_button_pressed)
+	deck_viewer.close_deck_viewer.connect(_on_close_deck_viewer)
 
 func setup_world(_player: Player, player_run_type: RunType	= RunType.NEW_RUN) -> void:
 	player = _player
@@ -37,6 +42,7 @@ func setup_world(_player: Player, player_run_type: RunType	= RunType.NEW_RUN) ->
 	run_type = player_run_type
 	
 	if run_type == RunType.CONTINUE_RUN:
+		player.load_game()
 		load_data()
 	player_token.global_position = overworld_nodes[str(player_at_node)].global_position
 	save_game()
@@ -60,6 +66,13 @@ func _on_overworld_node_selected(overworld_node: OverworldNode) -> void:
 		save_game()
 		_move_player_token(player_at_node, player_at_node + 1)
 		player_at_node += 1
+
+func _on_deck_viewer_button_pressed() -> void:
+	deck_viewer.load_deck(player.deck)
+	deck_viewer.visible = true
+
+func _on_close_deck_viewer() -> void:
+	deck_viewer.visible = false
 
 func is_valid_combat_node(overworld_node: OverworldNode) -> bool:
 	return overworld_node.node_id == player_at_node and not overworld_node.completed

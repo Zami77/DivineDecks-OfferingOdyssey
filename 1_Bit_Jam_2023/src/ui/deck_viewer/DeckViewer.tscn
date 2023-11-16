@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://205v6jljjcr1"]
+
+[ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="1_i124l"]
+[ext_resource type="Script" path="res://src/ui/deck_viewer/DeckViewer.gd" id="1_n7c8t"]
+
+[node name="DeckViewer" type="Node2D"]
+script = ExtResource("1_n7c8t")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 720.0
+offset_bottom = 1080.0
+theme = ExtResource("1_i124l")
+
+[node name="CloseButton" type="Button" parent="Panel"]
+offset_left = 224.0
+offset_top = 40.0
+offset_right = 480.0
+offset_bottom = 104.0
+theme = ExtResource("1_i124l")
+text = "Close"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = -1
+offset_left = 16.0
+offset_top = 128.0
+offset_right = 704.0
+offset_bottom = 920.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 244
+theme_override_constants/v_separation = 264
+columns = 3
