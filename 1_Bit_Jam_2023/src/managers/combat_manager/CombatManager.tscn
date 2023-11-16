@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck45dg212r6ji"]
+[gd_scene load_steps=11 format=3 uid="uid://ck45dg212r6ji"]
 
 [ext_resource type="PackedScene" uid="uid://cneuuoth3bny" path="res://src/deck/Deck.tscn" id="1_4f8vu"]
 [ext_resource type="Script" path="res://src/managers/combat_manager/CombatManager.gd" id="1_jj8pp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="5_82jrc"]
 [ext_resource type="PackedScene" uid="uid://cgkvcpap2sn0o" path="res://src/ui/combat_end_panel/CombatEndPanel.tscn" id="6_5igk6"]
 [ext_resource type="Texture2D" uid="uid://7dmrckohfbep" path="res://src/player/knight_portrait.png" id="7_7jfgp"]
+[ext_resource type="PackedScene" uid="uid://205v6jljjcr1" path="res://src/ui/deck_viewer/DeckViewer.tscn" id="8_hxpdd"]
 
 [sub_resource type="Animation" id="Animation_toflt"]
 resource_name = "player_take_damage"
@@ -54,10 +55,10 @@ position = Vector2(464, 544)
 position = Vector2(112, 0)
 
 [node name="PlayerStatsContainer" type="VBoxContainer" parent="."]
-offset_left = 264.0
-offset_top = 600.0
-offset_right = 456.0
-offset_bottom = 770.0
+offset_left = 224.0
+offset_top = 552.0
+offset_right = 416.0
+offset_bottom = 764.0
 theme = ExtResource("4_q0qis")
 alignment = 1
 
@@ -87,6 +88,20 @@ theme = ExtResource("4_q0qis")
 text = "End Turn"
 script = ExtResource("5_82jrc")
 
+[node name="ViewDiscardButton" type="Button" parent="PlayerStatsContainer"]
+layout_mode = 2
+theme = ExtResource("4_q0qis")
+text = "View Discard"
+script = ExtResource("5_82jrc")
+
+[node name="PlayerTextureRect" type="TextureRect" parent="."]
+offset_left = 32.0
+offset_top = 560.0
+offset_right = 224.0
+offset_bottom = 752.0
+texture = ExtResource("7_7jfgp")
+expand_mode = 1
+
 [node name="CombatEndPanel" parent="." instance=ExtResource("6_5igk6")]
 visible = false
 offset_left = 200.0
@@ -94,15 +109,10 @@ offset_top = 552.0
 offset_right = 520.0
 offset_bottom = 744.0
 
-[node name="PlayerTextureRect" type="TextureRect" parent="."]
-offset_left = 72.0
-offset_top = 576.0
-offset_right = 264.0
-offset_bottom = 768.0
-texture = ExtResource("7_7jfgp")
-expand_mode = 1
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_lxdwc")
 }
+
+[node name="DeckViewer" parent="." instance=ExtResource("8_hxpdd")]
+visible = false
