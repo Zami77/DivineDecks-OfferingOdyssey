@@ -32,3 +32,8 @@ static var heal_health_potion_card_packed_scene = preload("res://src/cards/heal_
 
 
 static var enemy_specter_packed_scene = preload("res://src/enemies/specter/Specter.tscn")
+static var enemy_spiker_packed_scene = preload("res://src/enemies/spiker/Spiker.tscn")
+static var enemy_bug_monkey_packed_scene = preload("res://src/enemies/bug_monkey/BugMonkey.tscn")
+static var enemy_rex_packed_scene = preload("res://src/enemies/rex/Rex.tscn")
+static var enemy_rock_slime_packed_scene = preload("res://src/enemies/rock_slime/RockSlime.tscn")
+static var enemy_crab_packed_scene = preload("res://src/enemies/crab/Crab.tscn")

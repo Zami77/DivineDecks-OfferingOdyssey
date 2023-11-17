@@ -62,7 +62,7 @@ func _move_player_token(old_node_id: int, new_node_id: int) -> void:
 func _setup_hint_selector() -> void:
 	var current_node: OverworldNode = overworld_nodes.get(str(player_at_node), null)
 	var next_node: OverworldNode = overworld_nodes.get(str(player_at_node + 1), null)
-	if current_node.completed:
+	if current_node.completed and next_node:
 		hint_selector.global_position = next_node.global_position + Vector2(32, 32)
 	else:
 		hint_selector.global_position = current_node.global_position + Vector2(32, 32)

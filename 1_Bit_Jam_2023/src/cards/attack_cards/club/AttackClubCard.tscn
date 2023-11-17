@@ -6,4 +6,4 @@
 [node name="AttackClubCard" instance=ExtResource("1_aab3h")]
 card_image_texture = ExtResource("2_4oeey")
 card_name = 9
-attack_amount = 1
+attack_amount = 2

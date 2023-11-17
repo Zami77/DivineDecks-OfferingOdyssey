@@ -5,4 +5,7 @@
 
 [node name="Specter" instance=ExtResource("1_4ak21")]
 enemy_texture = ExtResource("2_rne6o")
+action_pool = Array[int]([0, 0, 2, 0, 0])
+max_health = 7
 attack_amount = 1
+heal_amount = 1

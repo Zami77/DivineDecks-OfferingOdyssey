@@ -5,7 +5,7 @@
 
 [node name="AttackSwordCard" instance=ExtResource("1_xkihp")]
 card_image_texture = ExtResource("2_bbwmf")
-attack_amount = 2
+attack_amount = 3
 
 [node name="CardImage" parent="." index="1"]
 offset_left = 16.0
