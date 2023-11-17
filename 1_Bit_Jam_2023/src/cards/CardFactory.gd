@@ -10,5 +10,5 @@ static func get_card_packed_scene(card_name: Card.CardName) -> Card:
 			return ScenePaths.heal_heart_card_packed_scene.instantiate()
 		Card.CardName.DEFEND_HELMET:
 			return ScenePaths.defend_helmet_card_packed_scene.instantiate()
-	
+		
 	return null
