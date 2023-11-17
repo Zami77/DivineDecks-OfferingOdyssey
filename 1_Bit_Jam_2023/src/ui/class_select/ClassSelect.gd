@@ -10,6 +10,7 @@ signal class_type_selected(class_type: Player.ClassType)
 func _ready():
 	select_knight_button.pressed.connect(_on_class_selected.bind(Player.ClassType.KNIGHT))
 	select_warlock_button.pressed.connect(_on_class_selected.bind(Player.ClassType.WARLOCK))
+	_determine_classes_available()
 
 func _determine_classes_available() -> void:
 	# Knight always available
