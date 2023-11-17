@@ -17,5 +17,5 @@ offset_bottom = 1080.0
 texture = ExtResource("3_bqonp")
 
 [node name="Player" parent="." instance=ExtResource("3_dlpgm")]
-class_type = null
-start_health = null
+class_type = 0
+start_health = 8
