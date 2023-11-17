@@ -47,7 +47,14 @@ func setup_combat(_player: Player, enemy_type: Enemy.EnemyType = Enemy.EnemyType
 	for card_name in player.deck:
 		deck.add_card_from_name(card_name)
 	
+	if not DataManager.game_data.persistent_data.tutorial_seen:
+		_tutorial_dialog()
+		DataManager.game_data.persistent_data.tutorial_seen = true
+	
 	_execute_player_turn()
+
+func _tutorial_dialog() -> void:
+	DialogueManager.show_dialogue_balloon(load("res://src/dialogs/combat_tutorial/combat_tutorial.dialogue"))
 
 func _init_player(_player: Player):
 	player = _player
@@ -61,9 +68,7 @@ func _init_player(_player: Player):
 	player.save_game()
 
 func _set_player_texture_rect() -> void:
-	match player.class_type:
-		Player.ClassType.KNIGHT:
-			player_texture_rect.texture = Textures.knight_portrait
+	player_texture_rect.texture = UtilHelper.get_player_portrait(player.class_type)
 
 func _init_enemy(enemy_type: Enemy.EnemyType) -> void:
 	enemy = EnemyFactory.get_enemy_packed_scene(enemy_type)

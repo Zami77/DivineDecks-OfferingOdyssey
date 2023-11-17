@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://c1ea586eqxh1o"
+path="res://.godot/imported/combat_tutorial.dialogue-82ece8de5d9e4d561d84e111e3f73a34.tres"
+
+[deps]
+
+source_file="res://src/dialogs/combat_tutorial/combat_tutorial.dialogue"
+dest_files=["res://.godot/imported/combat_tutorial.dialogue-82ece8de5d9e4d561d84e111e3f73a34.tres"]
+
+[params]
+
+defaults=true
