@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://oo21ik1hem1s"]
+
+[node name="HintSelector" type="CPUParticles2D"]
+amount = 32
+lifetime = 0.2
+emission_shape = 1
+emission_sphere_radius = 64.0
+gravity = Vector2(0, 80)
+scale_amount_max = 4.0

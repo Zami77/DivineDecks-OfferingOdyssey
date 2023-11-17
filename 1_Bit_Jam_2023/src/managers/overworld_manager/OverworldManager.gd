@@ -11,6 +11,7 @@ signal combat_entered(enemy_type: Enemy.EnemyType, node_id: int)
 @onready var player_token: PlayerToken = $PlayerToken
 @onready var deck_viewer_button: Button = $DeckViewerButton
 @onready var deck_viewer: DeckViewer = $DeckViewer
+@onready var hint_selector: CPUParticles2D = $HintSelector
 
 var player: Player = null
 var overworld_nodes: Dictionary = {}
@@ -45,6 +46,7 @@ func setup_world(_player: Player, player_run_type: RunType	= RunType.NEW_RUN) ->
 		player.load_game()
 		load_data()
 	player_token.global_position = overworld_nodes[str(player_at_node)].global_position
+	_setup_hint_selector()
 	save_game()
 
 func _move_player_token(old_node_id: int, new_node_id: int) -> void:
@@ -52,6 +54,14 @@ func _move_player_token(old_node_id: int, new_node_id: int) -> void:
 	player_token_tween.tween_property(player_token, "position", overworld_nodes[str(new_node_id)].position, player_token_tween_duration)
 	await player_token_tween.finished
 	emit_signal("player_token_moved")
+
+func _setup_hint_selector() -> void:
+	var current_node: OverworldNode = overworld_nodes.get(str(player_at_node), null)
+	var next_node: OverworldNode = overworld_nodes.get(str(player_at_node + 1), null)
+	if current_node.completed:
+		hint_selector.global_position = next_node.global_position + Vector2(32, 32)
+	else:
+		hint_selector.global_position = current_node.global_position + Vector2(32, 32)
 
 func _on_player_token_selected() -> void:
 	print("player token selected")

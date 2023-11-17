@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ry6nwwl2e4vm"]
+[gd_scene load_steps=7 format=3 uid="uid://ry6nwwl2e4vm"]
 
 [ext_resource type="Script" path="res://src/managers/overworld_manager/OverworldManager.gd" id="1_tqpex"]
 [ext_resource type="PackedScene" uid="uid://nxpft531qbuj" path="res://src/managers/overworld_manager/overworld_node/OverworldNode.tscn" id="2_57xh2"]
 [ext_resource type="PackedScene" uid="uid://crwug5jfc3efe" path="res://src/managers/overworld_manager/player_token/PlayerToken.tscn" id="3_e6gnu"]
 [ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="4_gk4pq"]
 [ext_resource type="PackedScene" uid="uid://205v6jljjcr1" path="res://src/ui/deck_viewer/DeckViewer.tscn" id="5_d1dh2"]
+[ext_resource type="PackedScene" uid="uid://oo21ik1hem1s" path="res://src/common/particle_effects/HintSelector.tscn" id="6_m6ut0"]
 
 [node name="OverworldManager" type="Node2D"]
 script = ExtResource("1_tqpex")
@@ -44,3 +45,5 @@ text = "View Deck"
 
 [node name="DeckViewer" parent="." instance=ExtResource("5_d1dh2")]
 visible = false
+
+[node name="HintSelector" parent="." instance=ExtResource("6_m6ut0")]
