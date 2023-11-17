@@ -42,7 +42,7 @@ func draw() -> Card:
 func add_card(new_card: Card) -> void:
 	cards.append(new_card)
 	add_child(new_card)
-	new_card.position = position
+	new_card.global_position = global_position
 	new_card.visible = false
 	_check_visibility()
 	cards.shuffle()

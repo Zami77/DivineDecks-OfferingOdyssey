@@ -88,8 +88,10 @@ func _draw_hand():
 		return
 	
 	var cards_drawn = 0
+	var total_cards_left = deck.cards.size() + discard.cards.size()
+	var cards_to_draw = hand.hand_size if total_cards_left > hand.hand_size else total_cards_left
 	
-	while cards_drawn < hand.hand_size:
+	while cards_drawn < cards_to_draw:
 		if deck.cards.size() > 0:
 			var drawn_card = deck.draw()
 			_move_card(drawn_card, hand.global_position)
