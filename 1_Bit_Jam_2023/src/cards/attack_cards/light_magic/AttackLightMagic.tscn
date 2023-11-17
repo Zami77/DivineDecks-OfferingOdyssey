@@ -1,5 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcbo40va0xsjd"]
+[gd_scene load_steps=3 format=3 uid="uid://dcbo40va0xsjd"]
 
 [ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_kkv4c"]
+[ext_resource type="Texture2D" uid="uid://dy3ydk22dmpn" path="res://src/cards/attack_cards/light_magic/oryx_light_magic.png" id="2_c3vim"]
 
-[node name="Card" instance=ExtResource("1_kkv4c")]
+[node name="AttackLightMagic" instance=ExtResource("1_kkv4c")]
+card_image_texture = ExtResource("2_c3vim")
+card_types = Array[int]([0, 3])
+card_name = 13
+attack_amount = 1
+heal_amount = 1

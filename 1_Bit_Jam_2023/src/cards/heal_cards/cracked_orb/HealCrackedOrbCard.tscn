@@ -1,5 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://q07yu7fbjsgr"]
+[gd_scene load_steps=3 format=3 uid="uid://q07yu7fbjsgr"]
 
 [ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_1dwic"]
+[ext_resource type="Texture2D" uid="uid://btthpm48xdmte" path="res://src/cards/heal_cards/cracked_orb/oryx_cracked_orb.png" id="2_yixow"]
 
-[node name="Card" instance=ExtResource("1_1dwic")]
+[node name="HealCrackedOrbCard" instance=ExtResource("1_1dwic")]
+card_image_texture = ExtResource("2_yixow")
+card_types = Array[int]([3])
+card_name = 10

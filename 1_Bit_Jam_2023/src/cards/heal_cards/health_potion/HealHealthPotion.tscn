@@ -1,5 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddol5kiitirgu"]
+[gd_scene load_steps=3 format=3 uid="uid://ddol5kiitirgu"]
 
 [ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_cq5n1"]
+[ext_resource type="Texture2D" uid="uid://bb1fhan842m01" path="res://src/cards/heal_cards/health_potion/oryx_health_potion.png" id="2_vp7ym"]
 
-[node name="Card" instance=ExtResource("1_cq5n1")]
+[node name="HealHealthPotionCard" instance=ExtResource("1_cq5n1")]
+card_image_texture = ExtResource("2_vp7ym")
+card_types = Array[int]([3])
+card_name = 3
+heal_amount = 3

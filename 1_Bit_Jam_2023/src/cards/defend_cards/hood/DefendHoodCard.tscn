@@ -1,5 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://4dyh2fuc4tc2"]
+[gd_scene load_steps=3 format=3 uid="uid://4dyh2fuc4tc2"]
 
 [ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_tr8s0"]
+[ext_resource type="Texture2D" uid="uid://8jlxl0fl024u" path="res://src/cards/defend_cards/hood/oryx_hood.png" id="2_j4ab8"]
 
-[node name="Card" instance=ExtResource("1_tr8s0")]
+[node name="DefendHoodCard" instance=ExtResource("1_tr8s0")]
+card_image_texture = ExtResource("2_j4ab8")
+card_types = Array[int]([1])
+card_name = 5
+defend_amount = 2

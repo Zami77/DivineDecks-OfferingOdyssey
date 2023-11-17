@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy3ydk22dmpn"
-path="res://.godot/imported/tile117.png-9f9e3f97b82a77aa4cccb37963179ca1.ctex"
+uid="uid://chmv6tw40tx3h"
+path="res://.godot/imported/oryx_dark_magic.png-1329a21be3dcee2fd6ade59e0553ca99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/cards/attack_cards/light_magic/tile117.png"
-dest_files=["res://.godot/imported/tile117.png-9f9e3f97b82a77aa4cccb37963179ca1.ctex"]
+source_file="res://src/cards/attack_cards/dark_magic/oryx_dark_magic.png"
+dest_files=["res://.godot/imported/oryx_dark_magic.png-1329a21be3dcee2fd6ade59e0553ca99.ctex"]
 
 [params]
 

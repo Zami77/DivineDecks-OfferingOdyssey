@@ -1,5 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://biiehb6l5vp81"]
+[gd_scene load_steps=3 format=3 uid="uid://biiehb6l5vp81"]
 
 [ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_ni86t"]
+[ext_resource type="Texture2D" uid="uid://d1s0k78ph1bu3" path="res://src/cards/attack_cards/nuke/nuke_oryx.png" id="2_ox6kt"]
 
-[node name="Card" instance=ExtResource("1_ni86t")]
+[node name="AttackNukeCard" instance=ExtResource("1_ni86t")]
+card_image_texture = ExtResource("2_ox6kt")
+card_name = 8
+attack_amount = 10
