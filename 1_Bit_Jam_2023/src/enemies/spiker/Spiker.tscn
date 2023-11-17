@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci6rwc2bnkcru"]
+
+[ext_resource type="PackedScene" uid="uid://cts7km825n2ko" path="res://src/enemies/Enemy.tscn" id="1_epd1q"]
+[ext_resource type="Texture2D" uid="uid://qtnfkrolhh7w" path="res://src/enemies/pixel_monsters_1_by_theartofnemo/BW/Spiker.png" id="2_2ikw5"]
+
+[node name="Spiker" instance=ExtResource("1_epd1q")]
+enemy_type = 3
+enemy_texture = ExtResource("2_2ikw5")
+action_pool = Array[int]([0, 0, 1])
+max_health = 9
+attack_amount = 2
+defend_amount = 1

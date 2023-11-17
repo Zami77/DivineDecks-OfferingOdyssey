@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://fcad3pfdqsu5"]
+
+[ext_resource type="PackedScene" uid="uid://cts7km825n2ko" path="res://src/enemies/Enemy.tscn" id="1_dmr0q"]
+[ext_resource type="Texture2D" uid="uid://bl8y5ced2x4co" path="res://src/enemies/pixel_monsters_1_by_theartofnemo/BW/Rock Slime.png" id="2_6hxor"]
+
+[node name="RockSlime" instance=ExtResource("1_dmr0q")]
+enemy_type = 4
+enemy_texture = ExtResource("2_6hxor")
+action_pool = Array[int]([1])
+max_health = 4
+defend_amount = 1

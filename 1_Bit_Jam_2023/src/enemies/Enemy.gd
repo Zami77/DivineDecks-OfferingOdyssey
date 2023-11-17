@@ -15,8 +15,9 @@ signal action_selected(action: Action)
 @export var status_effect_amount: int = 1
 
 @onready var enemy_image: TextureRect = $EnemyImage
-@onready var health_label: Label = $HealthLabel
-@onready var upcoming_action_label: Label = $UpcomingActionLabel
+@onready var health_label: Label = $VBoxContainer/HealthLabel
+@onready var defense_label: Label = $VBoxContainer/DefenseLabel
+@onready var upcoming_action_label: Label = $VBoxContainer/UpcomingActionLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var current_health = max_health :
@@ -31,9 +32,13 @@ var upcoming_action: Action :
 		upcoming_action = value
 		_update_upcoming_action_label()
 var action_bag: Array[Action]
-var defense = 0
+var defense = 0 :
+	set(value):
+		defense = value
+		defense = max(0, defense)
+		_update_defense_label()
 
-enum EnemyType { SPECTER }
+enum EnemyType { SPECTER, REX, BUG_MONKEY, SPIKER, ROCK_SLIME, CRAB }
 enum Action { ATTACK, DEFEND, HEAL, STATUS }
 
 func _ready():
@@ -41,6 +46,7 @@ func _ready():
 	_fill_bag()
 	upcoming_action = action_bag[action_bag.size() - 1]
 	current_health = max_health
+	defense = 0
 
 func _fill_bag() -> void:
 	if not action_bag:
@@ -82,6 +88,21 @@ func _check_if_alive() -> void:
 func _update_health_label() -> void:
 	health_label.text = "Health: %d/%d" % [current_health, max_health]
 
-func _update_upcoming_action_label() -> void:
-	upcoming_action_label.text = "Upcoming Action: %s" % [Action.keys()[upcoming_action]]
+func _get_action_stat() -> int:
+	match upcoming_action:
+		Action.ATTACK:
+			return attack_amount
+		Action.DEFEND:
+			return defend_amount
+		Action.HEAL:
+			return heal_amount
+		Action.STATUS:
+			return status_effect_amount
+		_:
+			return 0
 
+func _update_upcoming_action_label() -> void:
+	upcoming_action_label.text = "Upcoming Action: %s %d" % [Action.keys()[upcoming_action], _get_action_stat()]
+
+func _update_defense_label() -> void:
+	defense_label.text = "Defense: %d" % [defense]

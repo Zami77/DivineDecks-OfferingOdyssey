@@ -52,7 +52,7 @@ position = Vector2(80, 784)
 position = Vector2(464, 544)
 
 [node name="EnemyArea" type="Node2D" parent="."]
-position = Vector2(112, 0)
+position = Vector2(160, 8)
 
 [node name="PlayerStatsContainer" type="VBoxContainer" parent="."]
 offset_left = 224.0

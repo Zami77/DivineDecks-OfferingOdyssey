@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://2llw536jne42"]
+
+[ext_resource type="PackedScene" uid="uid://cts7km825n2ko" path="res://src/enemies/Enemy.tscn" id="1_toi1r"]
+[ext_resource type="Texture2D" uid="uid://nb8yaa43poam" path="res://src/enemies/pixel_monsters_1_by_theartofnemo/BW/Fungusaurus Rex.png" id="2_444lx"]
+
+[node name="Rex" instance=ExtResource("1_toi1r")]
+enemy_type = 1
+enemy_texture = ExtResource("2_444lx")
+action_pool = Array[int]([0, 0, 1])
+max_health = 12
+attack_amount = 3
+defend_amount = 2

@@ -3,6 +3,7 @@
 ## Credits
 
 Font: https://tinyworlds.itch.io/free-pixel-font-thaleah
-Monster Art: The Art of Nemo https://theartofnemo.itch.io/1-bit-pixel-monster-pack-1
+Monster Art: RPGMakerWarehouse, The Art of Nemo https://rpgmakerwarehouse.theartofnemo.com/
 Card Icon Art: Oryx
+Player Portrait Art: Oryx
 Dialogue Manager by Nathan Hoad https://github.com/nathanhoad/godot_dialogue_manager/blob/main/LICENSE

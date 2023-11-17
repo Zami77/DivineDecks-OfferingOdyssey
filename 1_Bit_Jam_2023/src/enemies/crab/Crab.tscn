@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://1gw0v45icxa"]
+
+[ext_resource type="PackedScene" uid="uid://cts7km825n2ko" path="res://src/enemies/Enemy.tscn" id="1_mmsm4"]
+[ext_resource type="Texture2D" uid="uid://cvdhf4a7j4aje" path="res://src/enemies/pixel_monsters_1_by_theartofnemo/BW/Claw King.png" id="2_6rcsj"]
+
+[node name="Crab" instance=ExtResource("1_mmsm4")]
+enemy_type = 5
+enemy_texture = ExtResource("2_6rcsj")
+action_pool = Array[int]([0, 0, 1, 0])
+max_health = 8
+attack_amount = 2
+defend_amount = 2

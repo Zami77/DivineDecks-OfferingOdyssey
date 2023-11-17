@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://do6ave0mq0kyy"]
+
+[ext_resource type="PackedScene" uid="uid://cts7km825n2ko" path="res://src/enemies/Enemy.tscn" id="1_q3201"]
+[ext_resource type="Texture2D" uid="uid://d14y554ynphot" path="res://src/enemies/pixel_monsters_1_by_theartofnemo/BW/Bug Chimp.png" id="2_8h87l"]
+
+[node name="BugMonkey" instance=ExtResource("1_q3201")]
+enemy_type = 2
+enemy_texture = ExtResource("2_8h87l")
+max_health = 6
+attack_amount = 2

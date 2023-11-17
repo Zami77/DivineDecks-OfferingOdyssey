@@ -14,21 +14,26 @@ script = ExtResource("1_tqpex")
 
 [node name="OverworldNode" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
 position = Vector2(320, 960)
+enemy = 2
 
 [node name="OverworldNode2" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
-position = Vector2(320, 704)
+position = Vector2(320, 768)
 
 [node name="OverworldNode3" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
-position = Vector2(128, 768)
+position = Vector2(64, 768)
+enemy = 4
 
 [node name="OverworldNode4" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
-position = Vector2(128, 384)
+position = Vector2(64, 384)
+enemy = 5
 
 [node name="OverworldNode5" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
-position = Vector2(448, 448)
+position = Vector2(448, 384)
+enemy = 3
 
 [node name="OverworldNode6" parent="OverworldNodesHolder" instance=ExtResource("2_57xh2")]
-position = Vector2(320, 192)
+position = Vector2(256, 192)
+enemy = 1
 
 [node name="Line2D" type="Line2D" parent="."]
 
