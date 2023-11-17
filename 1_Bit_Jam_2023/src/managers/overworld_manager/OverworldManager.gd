@@ -48,8 +48,8 @@ func setup_world(_player: Player, player_run_type: RunType	= RunType.NEW_RUN) ->
 	player_token.global_position = overworld_nodes[str(player_at_node)].global_position
 	_setup_hint_selector()
 	save_game()
-	if run_type == RunType.NEW_RUN:
-		DialogueManager.show_example_dialogue_balloon(load("res://src/dialogs/balloon_theme/overworld_tutorial.dialogue"))
+	if not DataManager.game_data.persistent_data.tutorial_seen:
+		DialogueManager.show_dialogue_balloon(load("res://src/dialogs/balloon_theme/overworld_tutorial.dialogue"))
 
 func _move_player_token(old_node_id: int, new_node_id: int) -> void:
 	var player_token_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
