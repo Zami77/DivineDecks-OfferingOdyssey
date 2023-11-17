@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp5bt8auvcxbe"]
+
+[ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_aab3h"]
+[ext_resource type="Texture2D" uid="uid://csqlrb2xgua4c" path="res://src/cards/attack_cards/club/oryx_club.png" id="2_4oeey"]
+
+[node name="AttackClubCard" instance=ExtResource("1_aab3h")]
+card_image_texture = ExtResource("2_4oeey")
+card_name = 9
+attack_amount = 1

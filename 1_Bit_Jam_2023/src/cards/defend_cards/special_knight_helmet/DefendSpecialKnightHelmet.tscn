@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3vn02sf0r8ng"]
+
+[ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_df5bi"]
+[ext_resource type="Texture2D" uid="uid://bte28vncukelv" path="res://src/cards/defend_cards/special_knight_helmet/special_knight_helmet_oryx.png" id="2_e50b8"]
+
+[node name="DefendSpecialKnightHelmet" instance=ExtResource("1_df5bi")]
+card_image_texture = ExtResource("2_e50b8")
+card_types = Array[int]([1])
+card_name = 4
+defend_amount = 6

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://drudte6g0p1ns"]
+
+[ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_fmewf"]
+[ext_resource type="Texture2D" uid="uid://chmv6tw40tx3h" path="res://src/cards/attack_cards/dark_magic/oryx_dark_magic.png" id="2_0pq0s"]
+
+[node name="AttackDarkMagic" instance=ExtResource("1_fmewf")]
+card_image_texture = ExtResource("2_0pq0s")
+card_types = Array[int]([0, 3])
+card_name = 13
+attack_amount = 4
+heal_amount = -1

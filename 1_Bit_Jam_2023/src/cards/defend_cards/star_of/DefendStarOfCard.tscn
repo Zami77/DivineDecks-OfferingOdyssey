@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://crxo4ceh4puhc"]
+
+[ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_pniqv"]
+[ext_resource type="Texture2D" uid="uid://basomlyprcc86" path="res://src/cards/defend_cards/star_of/oryx_star_of.png" id="2_vsrak"]
+
+[node name="DefendStarOfCard" instance=ExtResource("1_pniqv")]
+card_image_texture = ExtResource("2_vsrak")
+card_types = Array[int]([1])
+card_name = 11
+defend_amount = 6

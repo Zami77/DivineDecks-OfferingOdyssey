@@ -38,13 +38,15 @@ func _ready():
 
 func setup_world(_player: Player, player_run_type: RunType	= RunType.NEW_RUN) -> void:
 	player = _player
+	
+	run_type = player_run_type
+	if run_type == RunType.CONTINUE_RUN:
+		load_data()
+		player.load_game()
+		
 	player_token.setup_token(player.class_type)
 	player_token.player_token_selected.connect(_on_player_token_selected)
-	run_type = player_run_type
 	
-	if run_type == RunType.CONTINUE_RUN:
-		player.load_game()
-		load_data()
 	player_token.global_position = overworld_nodes[str(player_at_node)].global_position
 	_setup_hint_selector()
 	save_game()

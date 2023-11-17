@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://8unrc3tjqq0o"]
+
+[ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_gxaxf"]
+[ext_resource type="Texture2D" uid="uid://c0xdx8igr5bf0" path="res://src/cards/attack_cards/scythe/oryx_scythe.png" id="2_ibgkr"]
+
+[node name="AttackScytheCard" instance=ExtResource("1_gxaxf")]
+card_image_texture = ExtResource("2_ibgkr")
+card_name = 7
+attack_amount = 7

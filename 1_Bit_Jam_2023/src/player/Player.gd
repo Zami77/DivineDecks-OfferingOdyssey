@@ -5,7 +5,14 @@ signal player_destroyed
 signal took_damage
 signal stats_updated
 
-@export var class_type: ClassType = ClassType.KNIGHT
+@export var class_type: ClassType = ClassType.KNIGHT :
+	set(value):
+		if value == class_type:
+			return
+		
+		class_type = value
+		_setup_class_type()
+		
 @export var start_health: int = 8
 
 var deck: Array[Card.CardName] = []
@@ -26,16 +33,26 @@ var statuses: Array[Card.StatusEffect] = []
 enum ClassType { KNIGHT, WARLOCK }
 
 func _ready():
-	max_health = start_health
+
+	_setup_class_type()
 	current_health = max_health
 	
-	_setup_starter_deck()
-	
 	load_game()
+
+func _setup_class_type() -> void:
+	var class_stats: PlayerStats
+	var class_deck: PrebuiltDeck
 	
-func _setup_starter_deck() -> void:
-	var start_deck_knight = ScenePaths.start_deck_knight
-	deck = start_deck_knight.deck.duplicate()
+	match class_type:
+		ClassType.KNIGHT:
+			class_stats = ScenePaths.knight_stats_resource
+			class_deck = ScenePaths.start_deck_knight
+		ClassType.WARLOCK:
+			class_stats = ScenePaths.warlock_stats_resource
+			class_deck = ScenePaths.start_deck_warlock
+	max_health = class_stats.max_health
+	current_health = max_health
+	deck = class_deck.deck.duplicate()
 
 func take_damage(damage_amount: int) -> void:
 	if damage_amount > defense:
@@ -51,6 +68,8 @@ func gain_defense(defense_gain: int) -> void:
 	defense += defense_gain
 
 func gain_health(health_gain: int) -> void:
+	if health_gain < 0:
+		emit_signal("took_damage")
 	current_health += health_gain
 
 func _reset_run_stats() -> void:
@@ -58,7 +77,7 @@ func _reset_run_stats() -> void:
 	max_health = start_health
 	class_type = ClassType.KNIGHT
 	deck = []
-	_setup_starter_deck()
+	_setup_class_type()
 	DataManager.reset_run_data()
 	
 func load_game() -> void:

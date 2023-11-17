@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu7jlsgtlritl"]
+
+[ext_resource type="PackedScene" uid="uid://dluup08j8tx5b" path="res://src/cards/Card.tscn" id="1_a45vv"]
+[ext_resource type="Texture2D" uid="uid://c48nspkn84cy6" path="res://src/cards/attack_cards/staff/oryx_staff.png" id="2_ueyjw"]
+
+[node name="AttackStaffCard" instance=ExtResource("1_a45vv")]
+card_image_texture = ExtResource("2_ueyjw")
+card_name = 6
+attack_amount = 1

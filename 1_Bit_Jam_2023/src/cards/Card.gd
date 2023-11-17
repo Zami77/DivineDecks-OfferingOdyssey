@@ -31,7 +31,11 @@ enum CardName {
 	ATTACK_STAFF, 
 	ATTACK_SCYTHE, 
 	ATTACK_NUKE, 
-	ATTACK_CLUB 
+	ATTACK_CLUB,
+	HEAL_CRACKED_ORB,
+	DEFEND_STAR_OF,
+	ATTACK_LIGHT_MAGIC,
+	ATTACK_DARK_MAGIC
 }
 
 func _ready():
@@ -49,13 +53,16 @@ func _setup_card_text() -> void:
 	for type in card_types:
 		match type:
 			CardType.ATTACK:
-				card_text.text += "deals %d damage to enemy" % attack_amount
+				card_text.text += "Attack: %d" % attack_amount
 			CardType.DEFEND:
-				card_text.text += "adds %d defense to player" % defend_amount
+				card_text.text += "Defend: %d" % defend_amount
 			CardType.STATUS:
-				card_text.text += "gives %d %s to enemy" % [status_effect_amount, StatusEffect.keys()[status_effect]]
+				card_text.text += "Status: %d %s" % [status_effect_amount, StatusEffect.keys()[status_effect]]
 			CardType.HEAL:
-				card_text.text += "heals %d health to player" % heal_amount
+				if heal_amount < 0:
+					card_text.text += "Hurt Self: %d" % (heal_amount * -1)
+				else:
+					card_text.text += "Heals: %d" % heal_amount
 		card_text.text += "\n"
 
 func use_card() -> void:
