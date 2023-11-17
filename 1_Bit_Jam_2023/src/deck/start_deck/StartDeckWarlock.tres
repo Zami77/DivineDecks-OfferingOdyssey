@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PrebuiltDeck" load_steps=2 format=3 uid="uid://w4v50clbq8fn"]
+
+[ext_resource type="Script" path="res://src/deck/start_deck/PrebuiltDeck.gd" id="1_g2khm"]
+
+[resource]
+script = ExtResource("1_g2khm")
+deck = Array[int]([0, 0, 0, 0, 1, 1, 1, 2, 2, 2])
