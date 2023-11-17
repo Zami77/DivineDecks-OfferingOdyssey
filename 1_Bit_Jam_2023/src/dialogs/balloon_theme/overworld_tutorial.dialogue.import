@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://bxw341c5a46v"
+path="res://.godot/imported/overworld_tutorial.dialogue-cfc5d1208ba1554eed6c67c61385ec58.tres"
+
+[deps]
+
+source_file="res://src/dialogs/balloon_theme/overworld_tutorial.dialogue"
+dest_files=["res://.godot/imported/overworld_tutorial.dialogue-cfc5d1208ba1554eed6c67c61385ec58.tres"]
+
+[params]
+
+defaults=true

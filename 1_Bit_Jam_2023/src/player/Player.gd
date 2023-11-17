@@ -23,7 +23,7 @@ var defense: int = 0 :
 		_stats_changed()
 var statuses: Array[Card.StatusEffect] = []
 
-enum ClassType { KNIGHT }
+enum ClassType { KNIGHT, WARLOCK }
 
 func _ready():
 	max_health = start_health

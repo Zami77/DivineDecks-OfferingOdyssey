@@ -10,7 +10,9 @@ var game_data = {
 		"overworld_nodes": {}
 	},
 	"settings": {},
-	"persistent_data": {}
+	"persistent_data": {
+		"tutorial_seen": false
+	}
 }
 
 func _ready():
