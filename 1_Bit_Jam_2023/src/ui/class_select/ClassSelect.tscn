@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://kuihsgdute5h"]
+
+[ext_resource type="Script" path="res://src/ui/class_select/ClassSelect.gd" id="1_f8c4f"]
+[ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="1_y7cq5"]
+[ext_resource type="Texture2D" uid="uid://7dmrckohfbep" path="res://src/player/knight_portrait.png" id="2_1abqa"]
+[ext_resource type="Texture2D" uid="uid://d05lsyvsmf87" path="res://src/player/warlock_portrait.png" id="3_1dmot"]
+[ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="4_5otnn"]
+
+[node name="ClassSelect" type="Node2D"]
+script = ExtResource("1_f8c4f")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_y7cq5")
+
+[node name="TitleLabel" type="Label" parent="Control"]
+offset_right = 704.0
+offset_bottom = 62.0
+theme_override_font_sizes/font_size = 64
+text = "Select Class"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClassSelectBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 416.0
+offset_bottom = 320.0
+
+[node name="KnightContainer" type="HBoxContainer" parent="Control/ClassSelectBoxContainer"]
+layout_mode = 2
+
+[node name="KnightPortrait" type="TextureRect" parent="Control/ClassSelectBoxContainer/KnightContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("2_1abqa")
+expand_mode = 1
+
+[node name="SelectKnightButton" type="Button" parent="Control/ClassSelectBoxContainer/KnightContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "Knight"
+script = ExtResource("4_5otnn")
+
+[node name="WarlockContainer" type="HBoxContainer" parent="Control/ClassSelectBoxContainer"]
+layout_mode = 2
+
+[node name="WarlockPortrait" type="TextureRect" parent="Control/ClassSelectBoxContainer/WarlockContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("3_1dmot")
+expand_mode = 1
+
+[node name="SelectWarlockButton" type="Button" parent="Control/ClassSelectBoxContainer/WarlockContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "Warlock"
+script = ExtResource("4_5otnn")

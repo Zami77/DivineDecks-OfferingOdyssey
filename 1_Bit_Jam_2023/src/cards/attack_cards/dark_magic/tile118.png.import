@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb1fhan842m01"
-path="res://.godot/imported/tile060.png-f7c3c5ef1e0ade0622497579423b39f0.ctex"
+uid="uid://chmv6tw40tx3h"
+path="res://.godot/imported/tile118.png-29781846b40efe5d47cb0e52bcd0ce7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/cards/heal_cards/health_potion/tile060.png"
-dest_files=["res://.godot/imported/tile060.png-f7c3c5ef1e0ade0622497579423b39f0.ctex"]
+source_file="res://src/cards/attack_cards/dark_magic/tile118.png"
+dest_files=["res://.godot/imported/tile118.png-29781846b40efe5d47cb0e52bcd0ce7e.ctex"]
 
 [params]
 

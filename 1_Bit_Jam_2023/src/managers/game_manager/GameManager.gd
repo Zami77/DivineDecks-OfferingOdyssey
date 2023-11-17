@@ -43,6 +43,9 @@ func _load_scene(scene_path: String):
 		current_scene.setup_world(player, run_type)
 		current_scene.combat_entered.connect(_on_combat_entered)
 	
+	if current_scene is ClassSelect:
+		current_scene.class_type_selected.connect(_on_class_selected)
+	
 	await transition_screen.faded_to_scene
 
 func _reset_run_data() -> void:
@@ -57,7 +60,7 @@ func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 		MainMenu.Option.START_RUN:
 			_reset_run_data()
 			run_type = OverworldManager.RunType.NEW_RUN
-			_load_scene(ScenePaths.overworld_manager)
+			_load_scene(ScenePaths.class_select)
 		MainMenu.Option.CONTINUE_RUN:
 			run_type = OverworldManager.RunType.CONTINUE_RUN
 			_load_scene(ScenePaths.overworld_manager)
@@ -78,3 +81,7 @@ func _on_combat_ended(combat_winner: CombatManager.TurnOwner) -> void:
 func _on_combat_entered(enemy_type: Enemy.EnemyType, node_id: int) -> void:
 	node_battled_at = node_id
 	_load_scene(ScenePaths.combat_manager)
+
+func _on_class_selected(class_type: Player.ClassType) -> void:
+	player.class_type = class_type
+	_load_scene(ScenePaths.overworld_manager)
