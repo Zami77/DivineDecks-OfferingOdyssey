@@ -12,6 +12,7 @@ offset_bottom = 1080.0
 theme = ExtResource("1_i124l")
 
 [node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 0
 offset_left = 224.0
 offset_top = 40.0
 offset_right = 480.0
@@ -20,7 +21,6 @@ theme = ExtResource("1_i124l")
 text = "Close"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-anchors_preset = -1
 offset_left = 16.0
 offset_top = 128.0
 offset_right = 704.0
