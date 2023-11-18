@@ -2,7 +2,8 @@
 You draw 3 cards per turn and you may use any number of them.
 However, each card is one time use. Make sure you need to use the card when you do.
 At the end of the turn, any cards remaining will go to your discard pile. When the deck runs out, the discard is shuffled into the deck.
-You lose the combat if you have no cards left in deck or your player has no health.
+You lose the combat if you have no cards left in deck or your character has no health.
 Defense prevents attack damage, but does not carry over from battle to battle.
+Above the enemy states what its next move will be.
 Good Luck!
 => END

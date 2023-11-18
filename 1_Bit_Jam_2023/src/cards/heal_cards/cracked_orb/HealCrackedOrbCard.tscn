@@ -7,3 +7,4 @@
 card_image_texture = ExtResource("2_yixow")
 card_types = Array[int]([3])
 card_name = 10
+heal_amount = 4

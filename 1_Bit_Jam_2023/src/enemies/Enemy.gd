@@ -54,6 +54,7 @@ func _fill_bag() -> void:
 		action_bag.shuffle()
 
 func take_damage(damage_amount: int) -> void:
+	AudioManager.play_take_damage()
 	animation_player.play("take_damage")
 	if damage_amount > defense:
 		damage_amount -= defense
@@ -62,6 +63,8 @@ func take_damage(damage_amount: int) -> void:
 		defense -= damage_amount
 		damage_amount = 0
 	current_health -= damage_amount
+	await animation_player.animation_finished
+	AudioManager.play_enemy_take_damage_growl()
 
 func gain_defense(defense_gain: int) -> void:
 	defense += defense_gain
@@ -83,6 +86,9 @@ func execute_turn() -> void:
 
 func _check_if_alive() -> void:
 	if current_health <= 0:
+		AudioManager.play_enemy_death_growl()
+		animation_player.play("enemy_death")
+		await animation_player.animation_finished
 		emit_signal("enemy_destroyed")
 
 func _update_health_label() -> void:

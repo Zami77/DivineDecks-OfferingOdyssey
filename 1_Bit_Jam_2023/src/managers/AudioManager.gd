@@ -23,6 +23,39 @@ var whoosh = [
 ]
 var whoosh_bag = []
 
+var monster_pain_growl = [
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Pain 001.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Pain 002.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Pain 003.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Pain 004.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Pain 005.wav"
+]
+var monster_pain_growl_bag = []
+
+var monster_attack_growl = [
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Attack 001.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Attack 002.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Attack 003.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Attack 004.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Attack 005.wav"
+]
+var monster_attack_growl_bag = []
+
+var monster_death_growl = [
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Dies 001.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Dies 002.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Dies 003.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Dies 004.wav"
+]
+var monster_death_growl_bag = []
+
+var take_damage = [
+	"res://src/common/sound_fx/damage_sound_fx/take_damage/punch_grit_wet_impact_01.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/take_damage/punch_grit_wet_impact_02.wav", 
+	"res://src/common/sound_fx/damage_sound_fx/take_damage/punch_grit_wet_impact_03.wav"
+]
+var take_damage_bag = []
+
 var button_press = "res://src/ui/default_button/FA_Confirm_Button_1_1.wav"
 var button_hover = "res://src/ui/default_button/button_hover.wav"
 
@@ -35,7 +68,6 @@ var combat_songs = [
 	"res://src/common/music/Fantasy Action 1 Main.wav", 
 	"res://src/common/music/Fantasy Action 2 Main.wav"
 ]
-
 var combat_songs_bag = []
 
 var overworld_songs = [
@@ -142,13 +174,37 @@ func play_button_hover() -> void:
 
 func play_card_move() -> void:
 	_fill_bags()
-	play_sfx(whoosh_bag.pop_at(rng.randi_range(0, len(whoosh) - 1)))
+	play_sfx(whoosh_bag.pop_at(rng.randi_range(0, len(whoosh_bag) - 1)))
+
+func play_take_damage() -> void:
+	_fill_bags()
+	play_sfx(take_damage_bag.pop_at(rng.randi_range(0, len(take_damage_bag) - 1)))
+
+func play_enemy_take_damage_growl() -> void:
+	_fill_bags()
+	play_sfx(monster_pain_growl_bag.pop_at(rng.randi_range(0, len(monster_pain_growl_bag) - 1)))
+
+func play_enemy_attack_growl() -> void:
+	_fill_bags()
+	play_sfx(monster_attack_growl_bag.pop_at(rng.randi_range(0, len(monster_attack_growl_bag) - 1)))
+
+func play_enemy_death_growl() -> void:
+	_fill_bags()
+	play_sfx(monster_death_growl_bag.pop_at(rng.randi_range(0, len(monster_death_growl_bag) - 1)))
 
 func _fill_bags() -> void:
 	if not combat_songs_bag:
 		combat_songs_bag = combat_songs.duplicate()
 	if not whoosh_bag:
 		whoosh_bag = whoosh.duplicate()
+	if not take_damage_bag:
+		take_damage_bag = take_damage.duplicate()
+	if not monster_pain_growl_bag:
+		monster_pain_growl_bag = monster_pain_growl.duplicate()
+	if not monster_death_growl_bag:
+		monster_death_growl_bag = monster_death_growl.duplicate()
+	if not monster_attack_growl_bag:
+		monster_attack_growl_bag = monster_attack_growl.duplicate()
 
 func _process(delta):
 	if not sfx_queue.is_empty() and not available_players.is_empty():

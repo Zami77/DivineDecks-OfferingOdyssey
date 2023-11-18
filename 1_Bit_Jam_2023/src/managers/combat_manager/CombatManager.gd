@@ -214,6 +214,8 @@ func _on_card_selected_from_hand(card_selected: Card) -> void:
 	_execute_card_action(card_selected)
 
 func _on_enemy_destroyed() -> void:
+	if turn_owner == TurnOwner.COMBAT_OVER:
+		return
 	match_winner = TurnOwner.PLAYER
 	_end_combat()
 
@@ -246,10 +248,10 @@ func _on_player_took_damage() -> void:
 
 func _on_view_cards_button_pressed() -> void:
 	var remaining_cards = hand.cards + deck.cards + discard.cards
-	var remaining_card_names = []
+	var remaining_card_names: Array[Card.CardName] = []
 	
 	for card in remaining_cards:
-		remaining_card_names.append(card.card_name)
+		remaining_card_names.append(card.card_name as Card.CardName)
 		
 	deck_viewer.load_deck(remaining_card_names)
 	deck_viewer.visible = true

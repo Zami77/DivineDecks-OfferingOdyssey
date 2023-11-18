@@ -6,6 +6,6 @@
 [node name="AttackLightMagic" instance=ExtResource("1_kkv4c")]
 card_image_texture = ExtResource("2_c3vim")
 card_types = Array[int]([0, 3])
-card_name = 13
-attack_amount = 1
+card_name = 12
+attack_amount = 2
 heal_amount = 1
