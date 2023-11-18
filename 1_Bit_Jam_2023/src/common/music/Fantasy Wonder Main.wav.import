@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dbyd8lhnkbxgt"
+path="res://.godot/imported/Fantasy Wonder Main.wav-1ae452791c9dbdb60ef19c3f826cbb9a.sample"
+
+[deps]
+
+source_file="res://src/common/music/Fantasy Wonder Main.wav"
+dest_files=["res://.godot/imported/Fantasy Wonder Main.wav-1ae452791c9dbdb60ef19c3f826cbb9a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

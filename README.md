@@ -9,4 +9,4 @@ Monster Art: RPGMakerWarehouse, The Art of Nemo https://rpgmakerwarehouse.theart
 Card Icon Art: Oryx
 Player Portrait Art: Oryx
 Dialogue Manager by Nathan Hoad https://github.com/nathanhoad/godot_dialogue_manager/blob/main/LICENSE
-Sound: Game Dev Marketplace
+Sound Effects: Ovani, Game Dev Marketplace

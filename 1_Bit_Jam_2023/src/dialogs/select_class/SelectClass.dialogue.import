@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://deh8o6j1ff6gn"
+path="res://.godot/imported/SelectClass.dialogue-76eea45e58e10e4bed75fddeceea13a9.tres"
+
+[deps]
+
+source_file="res://src/dialogs/select_class/SelectClass.dialogue"
+dest_files=["res://.godot/imported/SelectClass.dialogue-76eea45e58e10e4bed75fddeceea13a9.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8bbmgui3og7l"
+path="res://.godot/imported/Hell Beast Dies 001.wav-fc2029a54fd007f80b9c8f569eb10d8a.sample"
+
+[deps]
+
+source_file="res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Dies 001.wav"
+dest_files=["res://.godot/imported/Hell Beast Dies 001.wav-fc2029a54fd007f80b9c8f569eb10d8a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

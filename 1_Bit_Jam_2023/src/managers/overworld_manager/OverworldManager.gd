@@ -24,6 +24,8 @@ var run_type: RunType = RunType.NEW_RUN
 enum RunType { NEW_RUN, CONTINUE_RUN }
 
 func _ready():
+	AudioManager.play_overworld_theme()
+	
 	var node_id = 1
 	for node in overworld_node_holder.get_children():
 		if node is OverworldNode:

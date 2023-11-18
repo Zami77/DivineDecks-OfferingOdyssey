@@ -1,6 +1,6 @@
 extends Node
 
-enum BgmPlaying { MAIN_MENU, MATCH, NONE }
+enum BgmPlaying { MAIN_MENU, COMBAT, OVERWORLD, VICTORY, DEFEAT, NONE }
 
 var num_players = 16
 var bus_master = "Master"
@@ -21,16 +21,33 @@ var whoosh = [
 	"res://src/common/sound_fx/card_sound_fx/FA_Whoosh_1_2.wav", 
 	"res://src/common/sound_fx/card_sound_fx/FA_Whoosh_1_3.wav"
 ]
+var whoosh_bag = []
 
 var button_press = "res://src/ui/default_button/FA_Confirm_Button_1_1.wav"
 var button_hover = "res://src/ui/default_button/button_hover.wav"
 
 var main_menu_songs = [
-	"res://common/music/menu_theme.wav"
+	"res://src/common/music/Fantasy Exploration Main.wav"
 ]
 
-var match_songs = [
-	"res://common/music/match_music.wav"
+var combat_songs = [
+	"res://src/common/music/Fantasy Wonder Main.wav",
+	"res://src/common/music/Fantasy Action 1 Main.wav", 
+	"res://src/common/music/Fantasy Action 2 Main.wav"
+]
+
+var combat_songs_bag = []
+
+var overworld_songs = [
+	"res://src/common/music/Ambience Ancient Magic.wav"
+]
+
+var defeat_songs = [
+	"res://src/common/music/Fantasy Defeat Main.wav"
+]
+
+var victory_songs = [
+	"res://src/common/music/Fantasy Victory Main.wav"
 ]
 
 func _ready():
@@ -56,9 +73,18 @@ func _on_bgm_player_finished():
 		BgmPlaying.MAIN_MENU:
 			bgm_playing = BgmPlaying.NONE
 			play_menu_theme()
-		BgmPlaying.MATCH:
+		BgmPlaying.COMBAT:
 			bgm_playing = BgmPlaying.NONE
-			play_match_theme()
+			play_combat_theme()
+		BgmPlaying.OVERWORLD:
+			bgm_playing = BgmPlaying.NONE
+			play_overworld_theme()
+		BgmPlaying.VICTORY:
+			bgm_playing = BgmPlaying.NONE
+			play_victory_theme()
+		BgmPlaying.DEFEAT:
+			bgm_playing = BgmPlaying.NONE
+			play_defeat_theme()
 
 func play_bgm(sound_path):
 	_fadeout_bgm()
@@ -68,13 +94,36 @@ func play_bgm(sound_path):
 func play_sfx(sound_path):
 	sfx_queue.append(sound_path)
 
-func play_match_theme() -> void:
-	if bgm_playing == BgmPlaying.MATCH:
+func play_combat_theme() -> void:
+	if bgm_playing == BgmPlaying.COMBAT:
 		return
 	
-	bgm_playing = BgmPlaying.MATCH
-	play_bgm(match_songs[0])
+	_fill_bags()
+	bgm_playing = BgmPlaying.COMBAT
+	play_bgm(combat_songs_bag.pop_at(rng.randi_range(0, len(combat_songs_bag) - 1)))
+
+
+func play_overworld_theme() -> void:
+	if bgm_playing == BgmPlaying.OVERWORLD:
+		return
 	
+	bgm_playing = BgmPlaying.OVERWORLD
+	play_bgm(overworld_songs[0])
+
+func play_victory_theme() -> void:
+	if bgm_playing == BgmPlaying.VICTORY:
+		return
+	
+	bgm_playing = BgmPlaying.VICTORY
+	play_bgm(victory_songs[0])
+
+func play_defeat_theme() -> void:
+	if bgm_playing == BgmPlaying.DEFEAT:
+		return
+	
+	bgm_playing = BgmPlaying.DEFEAT
+	play_bgm(defeat_songs[0])
+
 func play_menu_theme() -> void:
 	if bgm_playing == BgmPlaying.MAIN_MENU:
 		return
@@ -92,7 +141,14 @@ func play_button_hover() -> void:
 	play_sfx(button_hover)
 
 func play_card_move() -> void:
-	play_sfx(whoosh[rng.randi_range(0, len(whoosh) - 1)])
+	_fill_bags()
+	play_sfx(whoosh_bag.pop_at(rng.randi_range(0, len(whoosh) - 1)))
+
+func _fill_bags() -> void:
+	if not combat_songs_bag:
+		combat_songs_bag = combat_songs.duplicate()
+	if not whoosh_bag:
+		whoosh_bag = whoosh.duplicate()
 
 func _process(delta):
 	if not sfx_queue.is_empty() and not available_players.is_empty():
