@@ -8,6 +8,8 @@ signal class_type_selected(class_type: Player.ClassType)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if not DataManager.game_data.persistent_data.tutorial_seen:
+		DialogueManager.show_dialogue_balloon(load("res://src/dialogs/select_class/SelectClass.dialogue"))
 	select_knight_button.pressed.connect(_on_class_selected.bind(Player.ClassType.KNIGHT))
 	select_warlock_button.pressed.connect(_on_class_selected.bind(Player.ClassType.WARLOCK))
 	_determine_classes_available()

@@ -14,7 +14,7 @@ signal combat_ended(winner: TurnOwner)
 @onready var card_play_area: Node2D = $CardPlayArea
 @onready var enemy_area: Node2D = $EnemyArea
 @onready var end_turn_button: DefaultButton = $PlayerStatsContainer/EndTurnButton
-@onready var view_discard_button: DefaultButton = $PlayerStatsContainer/ViewDiscardButton
+@onready var view_cards_button: DefaultButton = $PlayerStatsContainer/ViewCardsButton
 @onready var combat_end_panel: CombatEndPanel = $CombatEndPanel
 @onready var player_health_label: Label = $PlayerStatsContainer/PlayerHealthLabel
 @onready var player_defense_label: Label = $PlayerStatsContainer/PlayerDefenseLabel
@@ -32,11 +32,13 @@ var mid_card_action: bool = false
 enum TurnOwner { PLAYER, ENEMY, COMBAT_OVER }
 
 func _ready():
+	AudioManager.play_combat_theme()
+	
 	DataManager.save_game()
 	hand.card_selected.connect(_on_card_selected_from_hand)
 	end_turn_button.pressed.connect(_on_end_turn_button_pressed)
 	combat_end_panel.end_combat_selected.connect(_on_end_combat_selected)
-	view_discard_button.pressed.connect(_on_view_discard_button_pressed)
+	view_cards_button.pressed.connect(_on_view_cards_button_pressed)
 	deck_viewer.close_deck_viewer.connect(_on_close_deck_viewer)
 	end_turn_button.disabled = true
 
@@ -146,6 +148,7 @@ func _execute_card_action(card: Card) -> void:
 	end_turn_button.disabled = false
 
 func _move_card(card: Card, end_global_position: Vector2) -> void:
+	AudioManager.play_card_move()
 	var card_pos_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
 	card_pos_tween.tween_property(card, "global_position", end_global_position, card_play_tween_duration)
 	await card_pos_tween.finished
@@ -211,6 +214,8 @@ func _on_card_selected_from_hand(card_selected: Card) -> void:
 	_execute_card_action(card_selected)
 
 func _on_enemy_destroyed() -> void:
+	if turn_owner == TurnOwner.COMBAT_OVER:
+		return
 	match_winner = TurnOwner.PLAYER
 	_end_combat()
 
@@ -241,13 +246,14 @@ func _on_player_stats_updated() -> void:
 func _on_player_took_damage() -> void:
 	animation_player.play("player_take_damage")
 
-func _on_view_discard_button_pressed() -> void:
-	var discard_card_names: Array[Card.CardName] = []
+func _on_view_cards_button_pressed() -> void:
+	var remaining_cards = hand.cards + deck.cards + discard.cards
+	var remaining_card_names: Array[Card.CardName] = []
 	
-	for card in discard.cards:
-		discard_card_names.append(card.card_name)
+	for card in remaining_cards:
+		remaining_card_names.append(card.card_name as Card.CardName)
 		
-	deck_viewer.load_deck(discard_card_names)
+	deck_viewer.load_deck(remaining_card_names)
 	deck_viewer.visible = true
 
 func _on_close_deck_viewer() -> void:

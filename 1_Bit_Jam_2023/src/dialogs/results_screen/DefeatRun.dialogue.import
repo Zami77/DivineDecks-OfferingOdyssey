@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://cf34qmfqo5c7m"
+path="res://.godot/imported/DefeatRun.dialogue-6e0a5860decde81805cad6a22d7fc94d.tres"
+
+[deps]
+
+source_file="res://src/dialogs/results_screen/DefeatRun.dialogue"
+dest_files=["res://.godot/imported/DefeatRun.dialogue-6e0a5860decde81805cad6a22d7fc94d.tres"]
+
+[params]
+
+defaults=true

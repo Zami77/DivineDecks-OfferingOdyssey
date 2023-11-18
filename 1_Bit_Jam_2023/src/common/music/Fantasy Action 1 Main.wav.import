@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xgk1qkqgwrya"
+path="res://.godot/imported/Fantasy Action 1 Main.wav-fd89fb48ff720ef7337c02f4403aa68e.sample"
+
+[deps]
+
+source_file="res://src/common/music/Fantasy Action 1 Main.wav"
+dest_files=["res://.godot/imported/Fantasy Action 1 Main.wav-fd89fb48ff720ef7337c02f4403aa68e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

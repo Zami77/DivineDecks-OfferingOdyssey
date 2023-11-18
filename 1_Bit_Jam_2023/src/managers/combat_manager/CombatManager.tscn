@@ -88,10 +88,10 @@ theme = ExtResource("4_q0qis")
 text = "End Turn"
 script = ExtResource("5_82jrc")
 
-[node name="ViewDiscardButton" type="Button" parent="PlayerStatsContainer"]
+[node name="ViewCardsButton" type="Button" parent="PlayerStatsContainer"]
 layout_mode = 2
 theme = ExtResource("4_q0qis")
-text = "View Discard"
+text = "View Cards"
 script = ExtResource("5_82jrc")
 
 [node name="PlayerTextureRect" type="TextureRect" parent="."]

@@ -55,6 +55,8 @@ func _setup_class_type() -> void:
 	deck = class_deck.deck.duplicate()
 
 func take_damage(damage_amount: int) -> void:
+	AudioManager.play_take_damage()
+	
 	if damage_amount > defense:
 		damage_amount -= defense
 		defense = 0

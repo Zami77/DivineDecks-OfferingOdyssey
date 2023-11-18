@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8jceu1fqjn6k"
+path="res://.godot/imported/Hell Beast Pain 005.wav-7a0597619b8a0c5aed669b86596d6431.sample"
+
+[deps]
+
+source_file="res://src/common/sound_fx/damage_sound_fx/enemy_sound_fx/Hell Beast Pain 005.wav"
+dest_files=["res://.godot/imported/Hell Beast Pain 005.wav-7a0597619b8a0c5aed669b86596d6431.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

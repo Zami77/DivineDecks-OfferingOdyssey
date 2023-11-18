@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cts7km825n2ko"]
+[gd_scene load_steps=7 format=3 uid="uid://cts7km825n2ko"]
 
 [ext_resource type="Script" path="res://src/enemies/Enemy.gd" id="1_xe70j"]
 [ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="2_tg7ta"]
@@ -35,8 +35,25 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, 64), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_sgg1x"]
+resource_name = "enemy_death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyImage:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ct5wy"]
 _data = {
+"enemy_death": SubResource("Animation_sgg1x"),
 "take_damage": SubResource("Animation_l0ogo"),
 "turn_shake": SubResource("Animation_hw4sk")
 }
