@@ -146,6 +146,7 @@ func _execute_card_action(card: Card) -> void:
 	end_turn_button.disabled = false
 
 func _move_card(card: Card, end_global_position: Vector2) -> void:
+	AudioManager.play_card_move()
 	var card_pos_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
 	card_pos_tween.tween_property(card, "global_position", end_global_position, card_play_tween_duration)
 	await card_pos_tween.finished

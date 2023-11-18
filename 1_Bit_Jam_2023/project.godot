@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DataManager="*res://src/managers/DataManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+AudioManager="*res://src/managers/AudioManager.gd"
 
 [dialogue_manager]
 
