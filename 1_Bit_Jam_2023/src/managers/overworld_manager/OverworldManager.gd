@@ -2,7 +2,7 @@ class_name OverworldManager
 extends Node2D
 
 signal player_token_moved
-signal combat_entered(enemy_type: Enemy.EnemyType, node_id: int)
+signal combat_entered(enemy_type: Enemy.EnemyType, node_id: int, is_final_combat: bool)
 
 @export var world_id: String = "overworld_1"
 @export var player_token_tween_duration: float = 0.5
@@ -75,7 +75,7 @@ func _on_overworld_node_selected(overworld_node: OverworldNode) -> void:
 	
 	if is_valid_combat_node(overworld_node):
 		save_game()
-		emit_signal("combat_entered", overworld_node.enemy, overworld_node.node_id)
+		emit_signal("combat_entered", overworld_node.enemy, overworld_node.node_id, overworld_node.node_id == len(overworld_nodes))
 	elif is_valid_advance(overworld_node):
 		save_game()
 		_move_player_token(player_at_node, player_at_node + 1)

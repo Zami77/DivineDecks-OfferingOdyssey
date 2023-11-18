@@ -5,6 +5,7 @@ static var combat_manager = "res://src/managers/combat_manager/CombatManager.tsc
 static var main_menu = "res://src/ui/main_menu/MainMenu.tscn"
 static var overworld_manager = "res://src/managers/overworld_manager/OverworldManager.tscn"
 static var class_select = "res://src/ui/class_select/ClassSelect.tscn"
+static var results_screen = "res://src/ui/results_screen/ResultsScreen.tscn"
 
 static var start_deck = "res://src/deck/start_deck/StartDeck.tscn"
 static var start_deck_knight = preload("res://src/deck/start_deck/StartDeckKnight.tres")
