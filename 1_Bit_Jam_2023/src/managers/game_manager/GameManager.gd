@@ -9,6 +9,8 @@ extends Node2D
 var current_scene = null
 var run_type: OverworldManager.RunType = OverworldManager.RunType.NEW_RUN
 var node_battled_at: int = -1
+var is_final_battle: bool = false
+var match_winner: CombatManager.TurnOwner = CombatManager.TurnOwner.PLAYER
 
 func _ready():
 	DataManager.load_game()
@@ -46,6 +48,10 @@ func _load_scene(scene_path: String):
 	if current_scene is ClassSelect:
 		current_scene.class_type_selected.connect(_on_class_selected)
 	
+	if current_scene is ResultsScreen:
+		current_scene.back_to_main_menu.connect(_on_back_main_menu)
+		current_scene.setup_results(player, match_winner == CombatManager.TurnOwner.PLAYER)
+	
 	await transition_screen.faded_to_scene
 
 func _reset_run_data() -> void:
@@ -69,19 +75,39 @@ func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 
 func _on_combat_ended(combat_winner: CombatManager.TurnOwner) -> void:
 	player.save_game()
+	match_winner = combat_winner
 	match combat_winner:
 		CombatManager.TurnOwner.PLAYER:
 			run_type = OverworldManager.RunType.CONTINUE_RUN
 			DataManager.game_data.overworld_data.overworld_nodes[str(node_battled_at)]['completed'] = true
-			_load_scene(ScenePaths.overworld_manager)
+			if is_final_battle:
+				_set_successful_run()
+				_load_scene(ScenePaths.results_screen)
+			else:
+				_load_scene(ScenePaths.overworld_manager)
 		CombatManager.TurnOwner.ENEMY:
 			DataManager.reset_run_data()
-			_load_scene(ScenePaths.main_menu)
+			_load_scene(ScenePaths.results_screen)
 
-func _on_combat_entered(enemy_type: Enemy.EnemyType, node_id: int) -> void:
+func _set_successful_run() -> void:
+	if not match_winner == CombatManager.TurnOwner.PLAYER:
+		return
+	
+	if player.class_type == Player.ClassType.KNIGHT:
+		DataManager.game_data.persistent_data.unlocked_characters[str(Player.ClassType.WARLOCK)] = true
+	
+	DataManager.save_game()
+
+func _on_combat_entered(enemy_type: Enemy.EnemyType, node_id: int, _is_final_battle: bool) -> void:
+	is_final_battle = false
+	is_final_battle = _is_final_battle
 	node_battled_at = node_id
 	_load_scene(ScenePaths.combat_manager)
 
 func _on_class_selected(class_type: Player.ClassType) -> void:
 	player.class_type = class_type
 	_load_scene(ScenePaths.overworld_manager)
+
+func _on_back_main_menu() -> void:
+	DataManager.reset_run_data()
+	_load_scene(ScenePaths.main_menu)

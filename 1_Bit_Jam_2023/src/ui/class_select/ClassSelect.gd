@@ -19,7 +19,7 @@ func _determine_classes_available() -> void:
 	# Set other classes as unavailable
 	select_warlock_button.disabled = true
 	
-	if DataManager.game_data.persistent_data.unlocked_characters.has(Player.ClassType.WARLOCK):
+	if DataManager.game_data.persistent_data.unlocked_characters.has(str(Player.ClassType.WARLOCK)):
 		select_warlock_button.disabled = false
 
 func _on_class_selected(class_type: Player.ClassType) -> void:

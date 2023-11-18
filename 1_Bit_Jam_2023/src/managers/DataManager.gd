@@ -12,9 +12,9 @@ var game_data = {
 	"settings": {},
 	"persistent_data": {
 		"tutorial_seen": false,
-		"unlocked_characters": [
-			Player.ClassType.KNIGHT
-		]
+		"unlocked_characters": {
+			Player.ClassType.KNIGHT: true
+		}
 	}
 }
 

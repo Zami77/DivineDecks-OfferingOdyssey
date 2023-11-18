@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://uwfxm6jphlnr"]
+
+[ext_resource type="Script" path="res://src/ui/results_screen/ResultsScreen.gd" id="1_jwp8f"]
+[ext_resource type="Theme" uid="uid://bm3c3n45abu72" path="res://src/ui/themes/default_theme.tres" id="1_w4kgn"]
+[ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="2_i7buj"]
+
+[node name="ResultsScreen" type="Node2D"]
+script = ExtResource("1_jwp8f")
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_right = 720.0
+offset_bottom = 64.0
+theme = ExtResource("1_w4kgn")
+theme_override_font_sizes/font_size = 64
+text = "Run Results"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="."]
+offset_left = 256.0
+offset_top = 1008.0
+offset_right = 464.0
+offset_bottom = 1046.0
+theme = ExtResource("1_w4kgn")
+text = "Main Menu"
+script = ExtResource("2_i7buj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 192.0
+offset_top = 240.0
+offset_right = 528.0
+offset_bottom = 800.0
+theme = ExtResource("1_w4kgn")
+alignment = 1
+
+[node name="RunOutcomeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Run: Successful"
+
+[node name="CardsRemainingLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cards Remaining: 0"
+
+[node name="PlayerClassLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Class: Knight"

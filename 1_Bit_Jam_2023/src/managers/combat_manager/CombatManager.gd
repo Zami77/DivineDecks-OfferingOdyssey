@@ -89,6 +89,7 @@ func _draw_hand():
 	if deck.cards.size() + discard.cards.size() <= 0:
 		print("Game Over, not enough cards")
 		match_winner = TurnOwner.ENEMY
+		player.deck = []
 		_end_combat()
 		return
 	
@@ -224,6 +225,12 @@ func _on_enemy_action_selected(action: Enemy.Action) -> void:
 	_do_enemy_action(action)
 
 func _on_end_combat_selected() -> void:
+	var remaining_cards = hand.cards + deck.cards + discard.cards
+	
+	player.deck = []
+	for card in remaining_cards:
+		player.deck.append(card.card_name)
+	
 	emit_signal("combat_ended", match_winner)
 
 func _on_player_stats_updated() -> void:
