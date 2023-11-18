@@ -1,4 +1,4 @@
-![DivineDecksProtoTitleArt](https://github.com/Zami77/1_BIT_JAM_2023/assets/15083731/7e924fc8-cc72-4829-84f0-c53736801796)
+![DivineDecksProtoTitleArt](https://github.com/Zami77/DivineDecks-OfferingOdyssey/assets/15083731/86ccb823-edf6-495a-a51d-12201963602a)
 
 # Divine Decks: Offering Odyssey
 [Play on itch.io!](https://yatchstudios.itch.io/divine-decks-offering-odyssey)
